@@ -8,14 +8,19 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
-import { OnlyAdminGuard } from './guards/only-admin.guard'
+import { OnlyAdminGuard } from './guards/only-admin.guard';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { ProductComponent } from './components/product/product.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component'
 
 const appRoutes: Routes = [
   {
-    path: '', redirectTo: '/home', pathMatch: 'full'
+    path: '', redirectTo: 'home', pathMatch: 'full'
   },
   {
-    path: '/home', component: HomeComponent
+    path: 'home', component: HomeComponent
   },
   {
     path: '**', component: NotFoundComponent
@@ -26,7 +31,12 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CatalogComponent,
+    ProductComponent,
+    AdminComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
