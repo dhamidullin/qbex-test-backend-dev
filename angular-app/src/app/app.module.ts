@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
+import { OnlyAdminGuard } from './guards/only-admin.guard'
+
 const appRoutes: Routes = [
   {
     path: '', redirectTo: '/home', pathMatch: 'full'
@@ -29,8 +31,10 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
+    FormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [OnlyAdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
