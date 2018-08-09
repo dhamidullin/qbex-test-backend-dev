@@ -1,3 +1,44 @@
-<p>
-  sign-up works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+      <form class="form-signin" (ngSubmit)="registration()">
+
+        <h2 class="form-signin-heading">Please sign in</h2>
+
+        <input class="form-control fix" [ngClass]="{'danger': (!username.valid) && (!username.untouched), 'success': username.valid}"
+          type="username" placeholder="Username" [(ngModel)]="registrationData.username" #username="ngModel" id="username"
+          name="username" pattern="[a-zA-Z0-9_]{5,32}" required="">
+
+        <input class="form-control fix" [ngClass]="{'danger': (!password.valid) && (!password.untouched), 'success': password.valid}"
+          type="password" placeholder="Password" [(ngModel)]="registrationData.password" #password="ngModel" id="password"
+          name="password" pattern="[a-zA-Z0-9_]{5,32}" required="">
+
+        <input class="form-control fix" [ngClass]="{'danger': (!confirm.untouched) && (!password.untouched) && ((!confirm.valid) || (password.value !== confirm.value)), 'success': (password.valid && (password.value == confirm.value))}"
+          type="password" placeholder="Confirm password" [(ngModel)]="confirmPassword" #confirm="ngModel" id="confirm" name="confirm"
+          pattern="[a-zA-Z0-9_]{5,32}" required="">
+
+        <button class="btn btn-lg btn-primary btn-block" [disabled]="(!username.valid) || (!password.valid) || (password.value !== confirm.value)"
+          type="submit">Registration</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+<hr>
+
+<style>
+  input.fix {
+    margin-bottom: 2px;
+  }
+
+  input.danger {
+    border: 1px solid red;
+    background-color: #ffcccc;
+  }
+
+  input.success {
+    border: 1px solid green;
+    background-color: #e6ffe6;
+  }
+</style>
