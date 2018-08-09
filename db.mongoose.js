@@ -9,5 +9,45 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     }
     // console.log('success');
 
-    
+    const UserSchema = new Schema({
+        username: {
+            type: String,
+            match: /[a-zA-Z0-9_]{5,32}/,
+            unique: true,
+            index: true,
+        },
+        password: {
+            type: String,
+            match: /[a-zA-Z0-9_]{5,32}/,
+        },
+        access_rights: {
+            type: String,
+            enum: ['admin', 'user'],
+            default: 'user'
+        }
+    });
+
+    const UserModel = mongoose.model('UserModel', UserSchema, "users");
+
+    exports.findUserByUsername = (username, callback) => {
+        UserModel.findOne({ username: username }, (err, doc) => {
+            callback(err, doc);
+        });
+    }
+
+    exports.addUser = (user, callback) => {
+        var newUser = new UserModel(user);
+        newUser.save((err) => {
+            callback(err);
+        });
+    }
+
+    // var admin = new UserModel({
+    //     username: 'admin',
+    //     password: 'admin',
+    //     access_rights: 'admin'
+    // });
+    // admin.save((err) => {
+    //     console.log(err);
+    // });
 });
