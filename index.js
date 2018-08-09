@@ -10,7 +10,7 @@ const db = require("./db.mongoose");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/my-dream-app/dist/my-dream-app'));
+app.use(express.static(__dirname + '/angular-app/dist/angular-app'));
 app.use(cookieParser());
 app.use(session({
     secret: '@%#!@#$!@#$!@#',
@@ -88,6 +88,9 @@ require('./index.routes')(app, db);
 
 
 
+app.get("/*", (req, res, next) => {
+    res.sendFile(__dirname + '/angular-app/dist/angular-app/index.html')
+});
 
 app.listen(port, () => {
     console.log('Server started on port ' + port);

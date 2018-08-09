@@ -26,7 +26,7 @@ export class SignUpComponent implements OnInit {
   }
 
   registration() {
-    this.httpService.registration(this.registrationData).subscribe(data => {
+    this.httpService.signUp(this.registrationData).subscribe(data => {
       var err = data.json().err
       if (err)
         return alert(err);

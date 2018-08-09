@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { UserInfo } from '../../classes/user-info';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  loginData: UserInfo = {
+    username: null,
+    password: null
+  };
 
-  ngOnInit() {
+  constructor(
+    private httpService: HttpService,
+    private router: Router
+  ) { }
+
+  ngOnInit() { }
+
+  login() {
+    this.httpService.signIn(this.loginData).subscribe(data => {
+      var err = data.json().err
+      if (err)
+        return alert(err);
+      alert("Вход выполнен! \n Переадресация на главную страницу.");
+      this.router.navigate(["/home"]);
+    });
   }
-
 }

@@ -8,24 +8,19 @@ import {UserInfo} from '../classes/user-info'
 })
 export class HttpService {
 
-
   constructor(private http: Http) { }
 
-  getTestData() {
-    return this.http.get("/getTestData");
+  signIn(loginData: UserInfo) {
+    return this.http.post("/sign-in", loginData);
   }
 
-  login(loginData: UserInfo) {
-    return this.http.post("/login", loginData);
+  signUp(registrationData: UserInfo) {
+    return this.http.post("/sign-up", registrationData);
   }
 
-  registration(registrationData: UserInfo) {
-    return this.http.post("/registration", registrationData);
-  }
-
-  getUserObject() {
-    return this.http.get("/userObject");
-  }
+  // getUserObject() {
+  //   return this.http.get("/userObject");
+  // }
 
   isAuthenticated() {
     return this.http.get("/isAuthenticated");

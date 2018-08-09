@@ -4,7 +4,7 @@
 
       <form class="form-signin" (ngSubmit)="registration()">
 
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Please sign up</h2>
 
         <input class="form-control fix" [ngClass]="{'danger': (!username.valid) && (!username.untouched), 'success': username.valid}"
           type="username" placeholder="Username" [(ngModel)]="registrationData.username" #username="ngModel" id="username"

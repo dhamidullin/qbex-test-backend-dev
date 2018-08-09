@@ -37,6 +37,7 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
 
     exports.addUser = (user, callback) => {
         var newUser = new UserModel(user);
+        newUser.access_rights = 'user';
         newUser.save((err) => {
             callback(err);
         });
