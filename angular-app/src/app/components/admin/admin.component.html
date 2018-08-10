@@ -13,10 +13,14 @@
     <tbody>
 
       <tr *ngFor="let item of items">
-        <td>{{item.id}}</td>
         <td>
-          <a href="item?id={{item.id}}">{{item.title}}</a>
+          {{item.id}}
+
         </td>
+        <td>
+          <a href="item?id={{item.id}}" innerHTML="{{item.title}}"></a>
+        </td>
+
         <td>
           <!-- <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-success">Изменить</button>
@@ -44,7 +48,6 @@
               <button class="dropdown-item text-danger" type="button">Удалить</button>
             </div>
           </div> -->
-
 
         </td>
       </tr>
