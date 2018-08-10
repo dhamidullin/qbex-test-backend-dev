@@ -17,12 +17,12 @@ export class OnlyAdminGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     return true;
-    return this.http.getUserObject().toPromise()
-      .then(data => {
-        return data.json().access_rights == 'admin';
-      })
-      .catch(() => {
-        return false;
-      });
+    // return this.http.getUserObject().toPromise()
+    //   .then(data => {
+    //     return data.json().access_rights == 'admin';
+    //   })
+    //   .catch(() => {
+    //     return false;
+    //   });
   }
 }

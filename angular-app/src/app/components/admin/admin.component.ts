@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  item: any = {
+  items: any = [{
+    id: 0,
+    title: 'NVIDIA GTX 1060',
     images: [
       'https://i.ebayimg.com/images/g/HEAAAOSwkjta-tCV/s-l640.jpg',
       'https://cdn2.riastatic.com/photosnew/general/adv_photos/hardware-vydeokarta-msi-geforce-gtx-1060-armor-6g-ocv1-912-v328-028__67289639m.jpg',
@@ -20,7 +22,7 @@ export class AdminComponent implements OnInit {
     <p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
 
     <p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>`
-  }
+  }];
 
   constructor() { }
 

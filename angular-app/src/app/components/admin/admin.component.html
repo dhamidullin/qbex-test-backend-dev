@@ -1,7 +1,48 @@
 <div class="row admin-panel">
-  
 
-  
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Название</th>
+        <th scope="col">Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let item of items">
+        <td>{{item.id}}</td>
+        <td>
+          <a href="item?id={{item.id}}">{{item.title}}</a>
+        </td>
+        <td>
+          <!-- <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-success">Изменить</button>
+            <button type="button" class="btn btn-danger">Удалить</button>
+          </div> -->
+
+          <div class="dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item text-primary" href="#">Update</a>
+              <a class="dropdown-item text-danger" href="#">Remoove</a>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+
+
+    </tbody>
+  </table>
+
+
+
 
 
 

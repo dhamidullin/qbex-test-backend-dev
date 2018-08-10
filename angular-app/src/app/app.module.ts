@@ -15,6 +15,21 @@ import { ProductComponent } from './components/product/product.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 
+/**
+ * главная (home)
+ * каталог
+ * карточка товара
+ * 
+ * админ панель
+ * админ панель / добавить товар
+ * 
+ * вход
+ * регистрания
+ * 
+ * 404
+ */
+
+
 import { OnlyAdminGuard } from './guards/only-admin.guard';
 
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -22,8 +37,11 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'catalog', component: CatalogComponent },
-  { path: 'product', component: ProductComponent },
+  {
+    path: 'catalog', component: CatalogComponent, children: [
+      { path: 'product', component: ProductComponent },
+    ]
+  },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'about', component: AboutComponent },
