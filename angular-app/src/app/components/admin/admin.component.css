@@ -1,4 +1,13 @@
 div.admin-panel {
   margin: 8px;
 }
+
+div.admin-panel .dropdown-menu span {
+  cursor: pointer;
+  border-bottom: 0.5px solid lightgray;
+}
+
+div.admin-panel .dropdown-menu span:last-child {
+  border: none;
+}
 /*# sourceMappingURL=admin.component.css.map */
