@@ -17,12 +17,12 @@
         <a class="nav-link" href="#">О нас</a>
       </li>
     </ul>
-    
+
     <form class="form-inline my-2 my-lg-0" style="margin-right: 10px">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    
+
 
 
     <div class="dropdown">
@@ -42,3 +42,7 @@
 <div class="contei">
   <router-outlet></router-outlet>
 </div>
+
+<editor [(ngModel)]="data" [init]="{plugins: 'link lists'}" apiKey="vm3fozlgp04ukynxiispecc43xjwkph2xvlkhl2d15c1o5s1"></editor>
+
+<button class="btn btn-access" (click)="func()">button</button>
