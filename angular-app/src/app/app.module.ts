@@ -27,7 +27,8 @@ const appRoutes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin', canActivate: [OnlyAdminGuard], component: AdminComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

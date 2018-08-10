@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 
-import {UserInfo} from '../classes/user-info'
+import { UserInfo } from '../classes/user-info'
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,9 @@ export class HttpService {
     return this.http.post("/sign-up", registrationData);
   }
 
-  // getUserObject() {
-  //   return this.http.get("/userObject");
-  // }
+  getUserObject() {
+    return this.http.get("/userObject");
+  }
 
   isAuthenticated() {
     return this.http.get("/isAuthenticated");

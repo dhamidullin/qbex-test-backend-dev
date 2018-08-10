@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'qbex';
-  data: String = '';
+  // data: String = '';
 
-  func() {
-    console.log(this.data);
-  }
+  // func() {
+  //   console.log(this.data);
+  // }
 
 }
