@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,GAAG,AAAA,mBAAmB,CAAC;EACnB,UAAU,EAAE,IAAI;CAIe;;AALnC,AAIY,GAJT,AAAA,mBAAmB,CAElB,aAAa,CACT,SAAS,CACL,UAAU,CAAC;EACP,MAAM,EAAE,EAAE;CAAG",
+    "sources": [
+        "catalog.component.sass"
+    ],
+    "names": [],
+    "file": "catalog.component.css"
+}

@@ -1,3 +1,40 @@
-<p>
-  catalog works!
-</p>
+<div class="row catalog-cards-list">
+  <!--  -->
+  <!--  -->
+
+
+
+</div>
+<div class="row">
+
+
+
+  <div *ngFor="let prod of catalog" class=".col-1 col-sm-6 col-md-4 col-lg-4 col-xl-2">
+    <figure class="card card-product">
+      <div class="img-wrap">
+        <img class="img-fluid" src="{{prod.images[0]}}" style="border: 1px solid red">
+      </div>
+      <figcaption class="info-wrap">
+        <h4 class="title">{{prod.title}}</h4>
+        <p class="desc">{{prod.short_description}}</p>
+        <div class="rating-wrap">
+          <div class="label-rating">132 reviews</div>
+          <div class="label-rating">154 orders </div>
+        </div>
+        <!-- rating-wrap.// -->
+      </figcaption>
+      <div class="bottom-wrap">
+        <!-- <a href="" class="btn btn-sm btn-primary float-right">Order Now</a> -->
+        <div class="price-wrap h5">
+          <span class="price-new">{{prod.price / 100}} &#8372;</span>
+        </div>
+        <!-- price-wrap.// -->
+      </div>
+      <!-- bottom-wrap.// -->
+    </figure>
+  </div>
+  <!-- col // -->
+
+
+
+</div>
