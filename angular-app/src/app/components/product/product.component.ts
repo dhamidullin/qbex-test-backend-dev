@@ -21,7 +21,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  product: any = '';
+  product: any = null;
 
   ngOnInit() {
     this.httpService.getProduct(this.id).subscribe(data => {
