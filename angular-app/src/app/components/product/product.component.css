@@ -2,14 +2,18 @@ h3.product-title {
   margin: 18px 0 12px;
 }
 
-div.row div.carousel {
+div.row div.left-side-bar {
+  padding: 0 6px;
+}
+
+div.row div.left-side-bar div.carousel {
   border-top: 3px solid lightgray;
   padding-top: 9px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-div.row div.carousel div.background-image {
+div.row div.left-side-bar div.carousel div.background-image {
   height: 375px;
   background-repeat: no-repeat;
   background-attachment: local;
@@ -17,10 +21,29 @@ div.row div.carousel div.background-image {
   background-size: contain;
 }
 
-div.row div.description {
+div.row div.left-side-bar div.description {
   margin-top: 6px;
   padding: 6px 4px;
   border-top: 3px solid lightgray;
+}
+
+div.row div.right-side-bar {
+  padding: 0 6px;
+}
+
+div.row div.right-side-bar div.buy-panel {
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+}
+
+div.row div.right-side-bar div.buy-panel span.price {
+  display: inline-block;
+  padding-right: 1em;
+  font-size: 125%;
+}
+
+div.row div.right-side-bar div.buy-panel button {
+  font-size: 125%;
 }
 
 div.spacer {

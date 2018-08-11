@@ -88,9 +88,9 @@ app.get('/getCatalog', (req, res, next) => {
     })
 });
 
-app.get('/getProductById', (req, res, next) => {
-    var id = req.query.id;
-    db.getOneProductById(id, (err, doc) => {
+app.get('/getProductByLink:link', (req, res, next) => {
+    var link = req.params.link;
+    db.getOneProductByLink(link, (err, doc) => {
         res.end(JSON.stringify({
             product: doc
         }));

@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             type: String,
             match: /[a-zA-Z0-9_]{5,32}/,
             unique: true,
-            index: true,
+            index: true
         },
         password: {
             type: String,
@@ -38,7 +38,8 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
         },
         link: {
             type: String,
-            unique: true
+            unique: true,
+            index: true
         },
         images: {
             type: Array
@@ -79,8 +80,8 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             callback(err);
         });
     }
-    exports.getOneProductById = (id, callback) => {
-        ProductModel.findById(ObjectId(id), (err, doc) => {
+    exports.getOneProductByLink = (link, callback) => {
+        ProductModel.findOne({ link: link }, (err, doc) => {
             callback(err, doc);
         });
     }

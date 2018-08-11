@@ -22,10 +22,10 @@ export class ProductComponent implements OnInit {
     this.link = this.activatedRoute.snapshot.params['link'];
 
 
-    // this.httpService.getProduct(this.link).subscribe(data => {
-    //   this.product = data.json();
-    //   console.log(data.json());
-    // });
+    this.httpService.getProduct(this.link).subscribe(data => {
+      this.product = data.json();
+      console.log(data.json());
+    });
 
     this.product = {
       title: 'Kingston SSDNow A400 240GB 2.5" SATAIII TLC (SA400S37/240G)',

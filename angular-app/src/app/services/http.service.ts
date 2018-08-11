@@ -30,7 +30,7 @@ export class HttpService {
     return this.http.get("/getCatalog");
   }
 
-  getProduct(id: number) {
-    return this.http.get("/getProductById?id=" + id);
+  getProduct(link: String) {
+    return this.http.get("/getProductByLink:" + link);
   }
 }

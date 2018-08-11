@@ -15,32 +15,26 @@
 
 <div class="row">
 
-  <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7" style="background-color: transparent">
+  <div class="left-side-bar col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
-      <ol class="carousel-indicators">
-
-        <!-- <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li> -->
-
-        <!-- <li *ngFor="let imgUrl of product.images, let i = index" [ngClass]="{'active': i == 0}" data-target="#carouselExampleIndicators" data-slide-to="{{i}}"></li> -->
-
-      </ol>
+      <!-- <ol class="carousel-indicators"> -->
+      <!-- <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li> -->
+      <!-- <li *ngFor="let imgUrl of product.images, let i = index" [ngClass]="{'active': i == 0}" data-target="#carouselExampleIndicators" data-slide-to="{{i}}"></li> -->
+      <!-- </ol> -->
 
       <div class="carousel-inner">
-
         <div *ngFor="let imgUrl of product.images, let i = index" [ngClass]="{'active': i == 0}" class="carousel-item">
           <!-- <img class="d-block w-100" src="{{imgUrl}}"> -->
           <div class="background-image d-block w-100" [style.background-image]="'url(' + imgUrl + ')'"></div>
         </div>
-
       </div>
 
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-
       <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
@@ -52,9 +46,20 @@
 
   </div>
 
-  <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5" style="background-color: yellow">
-    comments
+  <div class="right-side-bar col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+
+    <div class="buy-panel">
+      <span class="price text-success">{{product.price / 100}} &#8372;</span>
+      <button type="button" class="btn btn-outline-primary">
+        <i class="fas fa-shopping-basket"></i> Купить
+      </button>
+    </div>
+
+    <!-- <div class="comments">
+      comments soon
+    </div> -->
   </div>
+
 </div>
 
 <div class="spacer"></div>
