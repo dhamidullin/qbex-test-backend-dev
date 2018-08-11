@@ -78,7 +78,7 @@ var localStrategy = new LocalStrategy(
 );
 passport.use("localStrategy", localStrategy);
 
-require('./index.routes')(app, db);
+require('./index.routes')(app, db, passport);
 
 
 

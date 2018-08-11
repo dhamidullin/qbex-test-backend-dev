@@ -1,4 +1,4 @@
-module.exports = function (app, db) {
+module.exports = function (app, db, passport) {
 
     app.post("/sign-up", (req, res) => {
         if (req.isAuthenticated())

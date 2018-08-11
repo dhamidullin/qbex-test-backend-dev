@@ -15,10 +15,9 @@
       <tr *ngFor="let item of items">
         <td>
           {{item.id}}
-
         </td>
         <td>
-          <a href="item?id={{item.id}}" innerHTML="{{item.title}}"></a>
+          <a [routerLink]="['/catalog/product']" [queryParams]="{id: item.id }" innerHTML="{{item.title}}"></a>
         </td>
 
         <td>

@@ -16,15 +16,15 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 /**
- * главная (home)
- * каталог
- * карточка товара
+ * home
+ * catalog
+ * товара item
  * 
- * админ панель
+ * admin
  * админ панель / добавить товар
  * 
- * вход
- * регистрания
+ * sign-in
+ * sign-up
  * 
  * 404
  */
@@ -35,18 +35,48 @@ import { OnlyAdminGuard } from './guards/only-admin.guard';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
   {
-    path: 'catalog', component: CatalogComponent, children: [
-      { path: 'product', component: ProductComponent },
-    ]
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'admin', canActivate: [OnlyAdminGuard], component: AdminComponent },
-  { path: '**', component: NotFoundComponent },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'catalog',
+    component: CatalogComponent,
+    // children: [{
+    //   path: 'product',
+    //   component: ProductComponent
+    // }]
+  },
+  {
+    path: 'catalog/product',
+    component: ProductComponent
+  },
+  {
+    path: 'sign-in',
+    component: SignInComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'admin',
+    canActivate: [OnlyAdminGuard],
+    component: AdminComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
+  },
 ];
 
 @NgModule({
