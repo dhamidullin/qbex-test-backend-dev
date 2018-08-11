@@ -53,7 +53,7 @@ const appRoutes: Routes = [
     // }]
   },
   {
-    path: 'catalog/product',
+    path: 'catalog/:link',
     component: ProductComponent
   },
   {
