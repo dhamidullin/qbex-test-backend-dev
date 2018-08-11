@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+const ObjectId = mongoose.Types.ObjectId;
 
 mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     if (err) {
@@ -69,6 +69,11 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     exports.getOneProductById = (id, callback) => {
         ProductModel.findById(ObjectId(id), (err, doc) => {
             callback(err, doc);
+        });
+    }
+    exports.getCatalog = (query, callback) => {
+        ProductModel.find(query, (err, docs) => {
+            callback(err, docs);
         });
     }
 
