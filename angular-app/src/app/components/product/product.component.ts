@@ -11,7 +11,6 @@ export class ProductComponent implements OnInit {
 
   product: any = null;
   link: string = null;
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private httpService: HttpService

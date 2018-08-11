@@ -1,20 +1,21 @@
-<p>
+<!-- <p>
   product = {{product}}
 </p>
 <p>
   link = {{link}}
 </p>
 
-<hr>
+<div style="width: 100px; height: 100px;" [style.background-image]="'url(' + randomurl + ')'">
+1
+</div>
 
+<hr> -->
 
-
-
-<h3>{{product.title}}</h3>
+<h3 class="product-title">{{product.title}}</h3>
 
 <div class="row">
 
-  <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7" style="background-color: red">
+  <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7" style="background-color: transparent">
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
@@ -29,7 +30,8 @@
       <div class="carousel-inner">
 
         <div *ngFor="let imgUrl of product.images, let i = index" [ngClass]="{'active': i == 0}" class="carousel-item">
-          <img class="d-block w-100" src="{{imgUrl}}">
+          <!-- <img class="d-block w-100" src="{{imgUrl}}"> -->
+          <div class="background-image d-block w-100" [style.background-image]="'url(' + imgUrl + ')'"></div>
         </div>
 
       </div>
@@ -46,9 +48,13 @@
 
     </div>
 
+    <div class="description" innerHTML="{{product.description}}"></div>
+
   </div>
 
   <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5" style="background-color: yellow">
     comments
   </div>
 </div>
+
+<div class="spacer"></div>
