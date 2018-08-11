@@ -46,11 +46,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'catalog',
-    component: CatalogComponent,
-    // children: [{
-    //   path: 'product',
-    //   component: ProductComponent
-    // }]
+    component: CatalogComponent
   },
   {
     path: 'catalog/:link',

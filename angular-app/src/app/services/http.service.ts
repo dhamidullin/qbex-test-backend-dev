@@ -31,6 +31,6 @@ export class HttpService {
   }
 
   getProduct(link: String) {
-    return this.http.get("/getProductByLink:" + link);
+    return this.http.get("/getProductByLink" + link);
   }
 }

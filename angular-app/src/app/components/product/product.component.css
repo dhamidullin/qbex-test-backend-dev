@@ -31,18 +31,40 @@ div.row div.right-side-bar {
   padding: 0 6px;
 }
 
-div.row div.right-side-bar div.buy-panel {
-  padding-top: 0.5em;
-  padding-bottom: 1em;
+div.row div.right-side-bar div.buy-panel-container {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-div.row div.right-side-bar div.buy-panel span.price {
+div.row div.right-side-bar div.buy-panel-container div.spacer1 {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+div.row div.right-side-bar div.buy-panel-container div.spacer1 {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+div.row div.right-side-bar div.buy-panel-container div.buy-panel {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+div.row div.right-side-bar div.buy-panel-container div.buy-panel span.price {
   display: inline-block;
   padding-right: 1em;
   font-size: 125%;
 }
 
-div.row div.right-side-bar div.buy-panel button {
+div.row div.right-side-bar div.buy-panel-container div.buy-panel button {
   font-size: 125%;
 }
 

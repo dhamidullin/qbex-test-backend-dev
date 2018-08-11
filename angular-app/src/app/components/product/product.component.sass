@@ -19,15 +19,22 @@ div.row
             border-top: 3px solid lightgray
     div.right-side-bar
         padding: 0 6px
-        div.buy-panel
-            padding-top: 0.5em
-            padding-bottom: 1em
-            span.price
-                display: inline-block
-                padding-right: 1em
-                font-size: 125%
-            button
-                font-size: 125%
+        div.buy-panel-container
+            display: inline-flex
+            justify-content: center
+            div.spacer1
+                flex-grow: 1
+            div.spacer1
+                flex-grow: 1
+            div.buy-panel
+                flex-grow: 1
+                // padding-top: 0.5em
+                span.price
+                    display: inline-block
+                    padding-right: 1em
+                    font-size: 125%
+                button
+                    font-size: 125%
 
 div.spacer
     height: 150px

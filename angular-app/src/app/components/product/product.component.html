@@ -11,9 +11,10 @@
 
 <hr> -->
 
-<h3 class="product-title">{{product.title}}</h3>
 
-<div class="row">
+<h3 *ngIf="product !== null" class="product-title">{{product.title}}</h3>
+<div *ngIf="product !== null" class="row">
+
 
   <div class="left-side-bar col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
 
@@ -48,11 +49,19 @@
 
   <div class="right-side-bar col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
 
-    <div class="buy-panel">
-      <span class="price text-success">{{product.price / 100}} &#8372;</span>
-      <button type="button" class="btn btn-outline-primary">
-        <i class="fas fa-shopping-basket"></i> Купить
-      </button>
+    <div class="buy-panel-container">
+
+      <div class="spacer1"></div>
+
+      <div class="buy-panel">
+        <span class="price text-success">{{product.price / 100}} &#8372;</span>
+        <button type="button" class="btn btn-outline-primary">
+          <i class="fas fa-shopping-basket"></i> Купить
+        </button>
+      </div>
+
+      <div class="spacer2"></div>
+
     </div>
 
     <!-- <div class="comments">
