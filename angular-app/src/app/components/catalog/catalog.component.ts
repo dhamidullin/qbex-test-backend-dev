@@ -40,6 +40,7 @@ export class CatalogComponent implements OnInit {
       price: 149999
     }, {
       title: 'NVIDIA GTX 1060',
+      link: 'msi_nvidia_gtx_1060',
       images: [
         'https://i.ebayimg.com/images/g/HEAAAOSwkjta-tCV/s-l640.jpg',
         'https://cdn2.riastatic.com/photosnew/general/adv_photos/hardware-vydeokarta-msi-geforce-gtx-1060-armor-6g-ocv1-912-v328-028__67289639m.jpg',

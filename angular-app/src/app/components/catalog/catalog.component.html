@@ -1,30 +1,22 @@
 <div class="row catalog-cards-list">
-  <!--  -->
-  <!--  -->
-
-
-
-</div>
-<div class="row">
-
-
 
   <div *ngFor="let prod of catalog" class=".col-1 col-sm-6 col-md-4 col-lg-4 col-xl-2">
     <figure class="card card-product">
       <div class="img-wrap">
-        <img class="img-fluid" src="{{prod.images[0]}}" style="border: 1px solid red">
+        <img class="img-fluid" src="{{prod.images[0]}}">
       </div>
       <figcaption class="info-wrap">
-        <h4 class="title">{{prod.title}}</h4>
-        <p class="desc">{{prod.short_description}}</p>
+        <h4 class="title">
+          <a [routerLink]="[prod.link]">{{prod.title}}</a>
+        </h4>
+        <p *ngIf="prod.short_description !== ''" class="desc">{{prod.short_description}}</p>
         <div class="rating-wrap">
-          <div class="label-rating">132 reviews</div>
-          <div class="label-rating">154 orders </div>
+          <!-- <div class="label-rating">Коментариев:</div> -->
         </div>
         <!-- rating-wrap.// -->
       </figcaption>
       <div class="bottom-wrap">
-        <!-- <a href="" class="btn btn-sm btn-primary float-right">Order Now</a> -->
+        <!-- <a href="" class="btn btn-sm btn-primary float-right">Купить</a> -->
         <div class="price-wrap h5">
           <span class="price-new">{{prod.price / 100}} &#8372;</span>
         </div>
