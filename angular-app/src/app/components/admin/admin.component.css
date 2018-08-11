@@ -10,4 +10,13 @@ div.admin-panel .dropdown-menu span {
 div.admin-panel .dropdown-menu span:last-child {
   border: none;
 }
+
+div.admin-panel div.background-image {
+  height: 48px;
+  width: 64px;
+  background-repeat: no-repeat;
+  background-attachment: local;
+  background-position: center;
+  background-size: contain;
+}
 /*# sourceMappingURL=admin.component.css.map */

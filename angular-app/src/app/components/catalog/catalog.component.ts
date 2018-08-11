@@ -18,7 +18,7 @@ export class CatalogComponent implements OnInit {
   catalog: any = null;
 
   ngOnInit() {
-    this.httpService.getCatalog().subscribe(data => {
+    this.httpService.getCatalog({}).subscribe(data => {
       this.catalog = data.json().catalog;
       console.log(this.catalog);
     });

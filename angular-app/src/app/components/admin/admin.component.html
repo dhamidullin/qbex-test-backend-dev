@@ -5,19 +5,20 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">id</th>
+        <th scope="col">Фото</th>
         <th scope="col">Название</th>
         <th scope="col">Действия</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="catalog !== null">
 
-      <tr *ngFor="let item of items">
+      <tr *ngFor="let item of catalog">
         <td>
-          {{item.id}}
+          <!-- {{item.images[0]}} -->
+          <div class="background-image" [style.background-image]="'url(' + item.images[0] + ')'"></div>
         </td>
         <td>
-          <a [routerLink]="['/catalog/product']" [queryParams]="{id: item.id }" innerHTML="{{item.title}}"></a>
+          <a [routerLink]="['/catalog/' + item.link]" innerHTML="{{item.title}}"></a>
         </td>
 
         <td>

@@ -26,8 +26,8 @@ export class HttpService {
     return this.http.get("/isAuthenticated");
   }
 
-  getCatalog() {
-    return this.http.get("/getCatalog");
+  getCatalog(query: Object) {
+    return this.http.get("/getCatalog", query);
   }
 
   getProduct(link: String) {
