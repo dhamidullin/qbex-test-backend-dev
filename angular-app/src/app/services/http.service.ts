@@ -25,4 +25,8 @@ export class HttpService {
   isAuthenticated() {
     return this.http.get("/isAuthenticated");
   }
+
+  getProduct(id: number) {
+    return this.http.get("/getProductById?id=" + id);
+  }
 }

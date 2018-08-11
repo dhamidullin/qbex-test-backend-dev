@@ -43,7 +43,7 @@ module.exports = function (app, db, passport) {
     app.get("/isAuthenticated", (req, res, next) => {
         res.end(JSON.stringify({ isAuthenticated: req.isAuthenticated() }));
     });
-    
+
     app.get("/userObject", (req, res, next) => {
         res.end(JSON.stringify({
             user: req.user,

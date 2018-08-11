@@ -4,10 +4,12 @@ const ObjectId = Schema.ObjectId;
 
 mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     if (err) {
-        console("Error while creating connection");
+        console('Error while creating connection');
         return console.log(err);
     }
     // console.log('success');
+
+    mongoose.connection.db.dropDatabase();
 
     const UserSchema = new Schema({
         username: {
@@ -26,7 +28,7 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             default: 'user'
         }
     });
-    const ItemSchema = new Schema({
+    const ProductSchema = new Schema({
         title: {
             type: String,
             unique: true
@@ -36,11 +38,15 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
         },
         description: {
             type: String
+        },
+        tags: {
+            type: Array,
+            default: []
         }
     });
 
-    const UserModel = mongoose.model('UserModel', UserSchema, "users");
-    const ItemModel = mongoose.model('ItemModel', ItemSchema, "items");
+    const UserModel = mongoose.model('UserModel', UserSchema, 'users');
+    const ProductModel = mongoose.model('ProductModel', ProductSchema, 'products');
 
     exports.addUser = (user, callback) => {
         var newUser = new UserModel(user);
@@ -49,57 +55,54 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             callback(err);
         });
     }
-
-    exports.findUserByUsername = (username, callback) => {
+    exports.getOneUserByUsername = (username, callback) => {
         UserModel.findOne({ username: username }, (err, doc) => {
             callback(err, doc);
         });
     }
-
-    exports.addItem = (item, callback) => {
-        var newItem = new ItemModel(item);
-        newItem.save((err) => {
+    exports.addProduct = (product, callback) => {
+        var newProduct = new ProductModel(product);
+        newProduct.save((err) => {
             callback(err);
         });
     }
-
-    exports.findItemById = (id, callback) => {
-        ItemModel.findOne({ _id: ObjectId(id) }, (err, doc) => {
+    exports.getOneProductById = (id, callback) => {
+        ProductModel.findById(ObjectId(id), (err, doc) => {
             callback(err, doc);
         });
     }
 
-    // var item = {
-    //     id: 0,
-    //     title: 'NVIDIA GTX 1060',
-    //     images: [
-    //         'https://i.ebayimg.com/images/g/HEAAAOSwkjta-tCV/s-l640.jpg',
-    //         'https://cdn2.riastatic.com/photosnew/general/adv_photos/hardware-vydeokarta-msi-geforce-gtx-1060-armor-6g-ocv1-912-v328-028__67289639m.jpg',
-    //         'https://cdn2.riastatic.com/photosnew/general/adv_photos/hardware-vydeokarta-inno3d-gtx-1060-6gb-gddr5-x2-n106f-2sdn-n5gs__85193804m.jpg'
-    //     ],
-    //     short_description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
-    //     description: `<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+    new ProductModel({
+        title: 'NVIDIA GTX 1060',
+        images: [
+            'https://i.ebayimg.com/images/g/HEAAAOSwkjta-tCV/s-l640.jpg',
+            'https://cdn2.riastatic.com/photosnew/general/adv_photos/hardware-vydeokarta-msi-geforce-gtx-1060-armor-6g-ocv1-912-v328-028__67289639m.jpg',
+            'https://cdn2.riastatic.com/photosnew/general/adv_photos/hardware-vydeokarta-inno3d-gtx-1060-6gb-gddr5-x2-n106f-2sdn-n5gs__85193804m.jpg'
+        ],
+        short_description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
+        description: `<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 
-    //     <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
+        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
 
-    //     <p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
+        <p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.</p>
 
-    //     <p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>`
-    // };
+        <p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>`
+    }).save((err) => {
+        console.log(err);
 
-    // var newItem = new ItemModel(item);
-    // newItem.save((err) => {
-    //     console.log(err);
-    // });
+        ProductModel.find({}, (err, doc) => {
+            console.log(doc);
+        })
 
+    });
 
-    // var admin = new UserModel({
-    //     username: 'admin',
-    //     password: 'admin',
-    //     access_rights: 'admin'
-    // });
-    // admin.save((err) => {
-    //     console.log(err);
-    // });
+    new UserModel({
+        username: 'admin',
+        password: 'admin',
+        access_rights: 'admin'
+    }).save((err) => {
+        console.log(err);
+    });
+
 
 });

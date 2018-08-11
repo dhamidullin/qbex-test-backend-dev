@@ -51,7 +51,7 @@ var localStrategy = new LocalStrategy(
         // done("логинопароль ошибочен", false);
         // done(null, userObject);
 
-        db.findUserByUsername(username, (err, user) => {
+        db.getOneUserByUsername(username, (err, user) => {
             console.log("user");
             console.log(user);
 
@@ -81,6 +81,14 @@ passport.use("localStrategy", localStrategy);
 require('./index.routes')(app, db, passport);
 
 
+app.get("/getProductById", (req, res, next) => {
+    var id = req.query.id;
+    db.getOneProductById(id, function (err, doc) {
+        res.end(JSON.stringify({
+            product: doc
+        }));
+    });
+});
 
 
 
