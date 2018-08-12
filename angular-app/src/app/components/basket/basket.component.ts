@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasketComponent implements OnInit {
 
+  array: any = ['hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello',]
+
   constructor() { }
 
   ngOnInit() {

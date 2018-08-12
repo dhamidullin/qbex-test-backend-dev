@@ -4,7 +4,7 @@
 
       <form class="form-signin" (ngSubmit)="login()">
 
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Вход в аккаунт</h2>
 
         <input class="form-control fix" [ngClass]="{'danger': (!username.valid) && (!username.untouched), 'success': username.valid}"
           type="username" placeholder="Username" [(ngModel)]="loginData.username" #username="ngModel" id="username" name="username"
@@ -14,14 +14,19 @@
           type="password" placeholder="Password" [(ngModel)]="loginData.password" #password="ngModel" id="password" name="password"
           pattern="[a-zA-Z0-9_]{5,32}" required="">
 
-        <button class="btn btn-lg btn-primary btn-block" [disabled]="(!username.valid) || (!password.valid)" type="submit">Login</button>
+        <button class="btn btn-lg btn-primary btn-block" [disabled]="(!username.valid) || (!password.valid)" type="submit">Вход</button>
 
       </form>
-
     </div>
   </div>
 </div>
 <hr>
+
+
+<div class="text-muted text-center">
+  Нет аккаунта?
+  <a [routerLink]="'/sign-up'">Зарегестрируйтесь!</a>
+</div>
 
 <style>
   input.fix {

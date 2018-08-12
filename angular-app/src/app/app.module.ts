@@ -64,11 +64,11 @@ const appRoutes: Routes = [
     path: 'about',
     component: AboutComponent
   },
-  {
-    path: 'admin',
-    canActivate: [OnlyAdminGuard],
-    component: AdminComponent
-  },
+  // {
+  //   path: 'admin',
+  //   canActivate: [OnlyAdminGuard],
+  //   component: AdminComponent
+  // },
   {
     path: '**',
     component: NotFoundComponent

@@ -1,0 +1,39 @@
+div.overlay
+    position: absolute
+    background: rgba(0, 0, 0, 0.75)
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    div.content-container
+        background: white
+        position: absolute
+        left: 10%
+        right: 10%
+        top: 10%
+        bottom: 10%
+        height: 2000
+        div.content
+            height: 100%
+            overflow: auto
+            position: relative
+            div.top-bar
+                border-bottom: 1px solid lightgray
+                padding: 3px 8px
+                text-align: end
+                position: relative
+                i
+                    color: #560101
+                    font-size: 160%
+                    display: inline-box
+                    width: 2em
+                    // border: 1px solid gray
+                    text-align: center
+                    transition: all 0.3s
+                i:hover
+                    color: #ff350c
+
+            table
+                position: absolute
+                left: 2%
+                right: 2%

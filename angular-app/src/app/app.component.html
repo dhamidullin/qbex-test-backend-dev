@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">{{title}}</a>
+  <a class="navbar-brand" [routerLink]="'/'">{{title}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,33 +8,43 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Каталог</a>
+        <a class="nav-link" [routerLink]="'/catalog'">Каталог</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Корзина</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">О нас</a>
+        <a class="nav-link" [routerLink]="'/about'">О нас</a>
       </li>
     </ul>
 
-    <form class="form-inline my-2 my-lg-0" style="margin-right: 10px">
+    <!-- <form class="form-inline my-2 my-lg-0" style="margin-right: 10px">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    </form> -->
 
+    <!-- <button class="btn btn-outline-secondary">
+      Здравствуйте,
+      <u>войдите в личный кабинет.</u>
+    </button> -->
 
+    <div *ngIf="user == null" class="text-white">
+      Здравствуйте,
+      <a [routerLink]="'sign-in'">войдите в личный кабинет</a>
+    </div>
 
-    <div class="dropdown">
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        Username: username
+    <div *ngIf="user != null" class="dropdown">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" [ngClass]="{'btn-outline-danger' : user.access_rights == 'admin'}"
+        data-toggle="dropdown">
+        Здравствуйте,
+        <span *ngIf="user.access_rights == 'admin'">Админ</span> {{user.username}}
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
+        <a class="dropdown-item" href="#">Logout</a>
       </div>
     </div>
+
+
   </div>
 </nav>
 
@@ -42,6 +52,17 @@
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>
+
+<app-basket [ngClass]="{'display-basket-true' : displayBasket == true, 'display-basket-false' : displayBasket == false}"></app-basket>
+<style>
+  .display-basket-true {
+    display: block
+  }
+
+  .display-basket-false {
+    display: none
+  }
+</style>
 
 <!-- <editor [(ngModel)]="data" [init]="{plugins: 'link lists'}" apiKey="vm3fozlgp04ukynxiispecc43xjwkph2xvlkhl2d15c1o5s1"></editor>
 

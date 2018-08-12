@@ -107,6 +107,7 @@ app.get('/getProductByLink:link', (req, res, next) => {
 
 
 
+
 app.get('/*', (req, res, next) => {
     res.sendFile(__dirname + '/angular-app/dist/angular-app/index.html')
 });

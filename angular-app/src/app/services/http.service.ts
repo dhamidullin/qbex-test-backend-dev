@@ -18,6 +18,10 @@ export class HttpService {
     return this.http.post("/sign-up", registrationData);
   }
 
+  logout() {
+    return this.http.get("/logout");
+  }
+
   getUserObject() {
     return this.http.get("/userObject");
   }

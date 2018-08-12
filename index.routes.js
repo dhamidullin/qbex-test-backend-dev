@@ -40,14 +40,29 @@ module.exports = function (app, db, passport) {
         })(req, res, next);
     });
 
+    app.get("/logout", (req, res, next) => {
+        req.session.destroy();
+        req.logout();
+        res.end(JSON.stringify({
+            err: false
+        }));
+    });
+
     app.get("/isAuthenticated", (req, res, next) => {
         res.end(JSON.stringify({ isAuthenticated: req.isAuthenticated() }));
     });
 
-    app.get("/userObject", (req, res, next) => {
-        res.end(JSON.stringify({
-            user: req.user,
-            session: req.session
-        }));
+    app.get('/userObject', (req, res, next) => {
+        if (req.isAuthenticated())
+            res.end(JSON.stringify({
+                user: {
+                    username: req.user.username,
+                    access_rights: req.user.access_rights
+                }
+            }));
+        else
+            res.end(JSON.stringify({
+                user: null
+            }));
     });
 };
