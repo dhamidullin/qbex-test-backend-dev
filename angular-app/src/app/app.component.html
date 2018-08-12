@@ -28,15 +28,15 @@
       <u>войдите в личный кабинет.</u>
     </button> -->
 
-    <div *ngIf="username == null" class="text-white">
+    <div *ngIf="dataServce.username == null" class="text-white">
       Здравствуйте,
       <a [routerLink]="'sign-in'">войдите в личный кабинет</a>
     </div>
 
-    <div *ngIf="username != null" class="dropdown">
-      <button type="button" class="btn btn-outline-primary dropdown-toggle" [ngClass]="{'btn-outline-danger': admin}" data-toggle="dropdown">
+    <div *ngIf="dataServce.username != null" class="dropdown">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" [ngClass]="{'btn-outline-danger': dataServce.admin}" data-toggle="dropdown">
         Здравствуйте,
-        <span *ngIf="admin">Админ</span> {{username}}
+        <span *ngIf="dataServce.admin">Админ</span> {{dataServce.username}}
       </button>
       <div class="dropdown-menu">
         <a class="dropdown-item" [routerLink]="" (click)="logout()">Выход</a>

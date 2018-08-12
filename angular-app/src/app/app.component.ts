@@ -2,6 +2,7 @@ import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from './services/http.service';
 import { EventsService } from './services/events.service';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -13,35 +14,33 @@ export class AppComponent implements OnInit {
   helloText: string = 'text privet'
 
   title: String = 'qbex';
-  username: string = null;
-  admin: boolean = false;
+  // username: string = null;
+  // admin: boolean = false;
   displayBasket: boolean = false;
 
   constructor(
     private httpService: HttpService,
     private router: Router,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private dataServce: DataService
   ) { }
 
   ngOnInit() {
     this.eventsService.reloadUserEvent.subscribe(() => {
-      this.reloadUser();
+      this.dataServce.reloadUser();
     });
-    this.reloadUser();
-  }
-
-  reloadUser() {
-    this.httpService.getUserObject().subscribe(data => {
-      this.username = data.json().user.username;
-      this.admin = data.json().user.admin;
-    });
+    this.dataServce.reloadUser();
   }
 
   logout() {
     this.httpService.logout().subscribe(data => {
       if (data.json().err == false) {
+        alert('вышел');
+        this.dataServce.reloadUser();
         this.router.navigate(['/']);
-        this.reloadUser();
+        setTimeout(() => {
+          this.dataServce.reloadUser();
+        }, 300)
       }
     });
   }

@@ -42,7 +42,6 @@ module.exports = function (app, db, passport) {
 
     app.get("/logout", (req, res, next) => {
         req.session.destroy();
-        // req.logout();
         req.logOut();
         res.end(JSON.stringify({
             err: false
@@ -54,6 +53,9 @@ module.exports = function (app, db, passport) {
     });
 
     app.get('/userObject', (req, res, next) => {
+        console.log('getUserObject');
+        console.log(req.isAuthenticated());
+        console.log(JSON.stringify(req.user));
         if (req.isAuthenticated())
             res.end(JSON.stringify({
                 user: {
@@ -63,8 +65,10 @@ module.exports = function (app, db, passport) {
             }));
         else
             res.end(JSON.stringify({
-                username: null,
-                admin: false
+                user: {
+                    username: null,
+                    admin: false
+                }
             }));
     });
 
