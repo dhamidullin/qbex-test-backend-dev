@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit {
       if (err)
         return alert(err);
       alert("Успех! Переадресация на страницу для входа.");
-      this.router.navigate(["/login"]);
+      this.router.navigate(["/sign-in"]);
     });
   }
 }

@@ -20,6 +20,15 @@ export class EditorComponent implements OnInit {
     private dataService: DataService
   ) { }
 
+  imageUrlBuffer: String = '';
+  addImageUrl() {
+    this.product.images.push(this.imageUrlBuffer);
+    this.imageUrlBuffer = '';
+  }
+  deleteImageUrl(index: number) {
+    this.product.images.splice(index, 1);
+  }
+
   ngOnInit() {
 
     this.link = this.activatedRoute.snapshot.params['link'];
@@ -32,20 +41,49 @@ export class EditorComponent implements OnInit {
     //   console.log(data.json());
     // });
 
+
+    /*
+    
+        const ProductSchema = new Schema({
+            title: {
+                type: String,
+            },
+            link: {
+                type: String,
+                unique: true,
+                index: true
+            },
+            images: {
+                type: Array
+            },
+            short_description: {
+                type: String
+            },
+            description: {
+                type: String
+            },
+            price: {
+                type: Number
+            },
+            createdDate: {
+                type: Date,
+                default: Date.now
+            },
+            updatedDate: {
+                type: Date,
+                default: Date.now
+            }
+        });
+    
+    */
+
     this.product = {
-      title: 'Kingston SSDNow A400 240GB 2.5" SATAIII TLC (SA400S37/240G)',
-      link: 'kingston_sa400s37_240g',
-      images: [
-        'https://i1.rozetka.ua/goods/1869202/copy_kingston_sa400s37_480g_58b165d6202d1_images_1869202184.jpg',
-        'https://i2.rozetka.ua/goods/1869202/copy_kingston_sa400s37_480g_58b165d6202d1_images_1869202262.jpg',
-        'https://i1.rozetka.ua/goods/1869202/copy_kingston_sa400s37_480g_58b165d6202d1_images_1869202340.jpg',
-        'https://i2.rozetka.ua/goods/1869202/kingston_sa400s37_240g_images_1869202574.jpg',
-        'https://i2.rozetka.ua/goods/1869202/kingston_sa400s37_240g_images_1869202652.jpg'
-      ],
+      title: '',
+      link: '',
+      images: [],
       short_description: '',
-      description: `Твердотельный накопитель Kingston A400 радикально повышает отзывчивость компьютерных систем, обеспечивая невероятно малое время загрузки операционной системы, старта программ и копирования файлов, недостижимое при использовании механических жестких дисков. Под управлением контроллера последнего поколения, позволяющего достичь скоростей чтения и записи до 500 и 450 МБ/с соответственно, этот SSD оказывается в десять раз быстрее традиционных жестких дисков при нагрузках, требующих высокую производительность, позволяет получить очень отзывчивую работу системы в многозадачных условиях и в целом более быструю систему.`,
-      price: 149999
+      description: ' ',
+      price: null
     };
   }
-
 }

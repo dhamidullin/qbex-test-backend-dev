@@ -1,0 +1,41 @@
+div.editor-main-panel
+    padding: 20px 8px
+    div.form-group
+
+div.spacer
+    height: 150px
+
+table
+    // *
+    //     border: none
+    td
+        button
+            display: inline-block
+        div.background-image-container
+            height: 48px
+            width: 64px
+            div.background-image
+                z-index: 50
+                user-select: none
+                height: 48px
+                width: 64px
+                background-repeat: no-repeat
+                background-attachment: local
+                background-position: center
+                background-size: contain
+                background-color: white
+        div.background-image-container:active    
+            div.background-image
+                position: fixed
+                top: 50%
+                left: 50%
+                right: 50%
+                bottom: 50%
+                height: 50%
+                margin-top: -25%
+                width: 50%
+                margin-left: -25%
+                border: 3px dashed lightgray
+        td.admins-buttons
+            div.btn-group
+                display: inline-block

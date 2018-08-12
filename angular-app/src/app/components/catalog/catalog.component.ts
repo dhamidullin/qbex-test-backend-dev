@@ -11,7 +11,7 @@ import { DataService } from '../../services/data.service';
 export class CatalogComponent implements OnInit {
 
   catalog: any = null;
-  rowDisplay: boolean = true; //  отображать в виде списка
+  rowDisplay: boolean = false; // отображать в виде списка
   query: any = {}
 
   constructor(
@@ -23,11 +23,7 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit() {
 
-    this.httpService.getCatalog(this.query).subscribe(data => {
-      this.catalog = data.json().catalog;
-      console.log(this.catalog);
-    });
-
+    this.reloadCatalog();
 
     // test catalog for ng serve 
     this.catalog = [{
@@ -61,10 +57,27 @@ export class CatalogComponent implements OnInit {
     <p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>`,
       price: 538099
     }];
-    this.catalog = [this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1], this.catalog[0], this.catalog[1]]
+  }
+
+  reloadCatalog() {
+    this.httpService.getCatalog(this.query).subscribe(data => {
+      this.catalog = data.json().catalog;
+      console.log(this.catalog);
+    });
   }
 
   deleteProduct(link: String) {
-    alert(link);
+    console.log(link);
+    var acceptStr = 'Удалить этот товар';
+    if (prompt("Введите '" + acceptStr + "' для подтверждения") === acceptStr) {
+      this.httpService.deleteProduct(link).subscribe(data => {
+        if (data.json().err == false) {
+          this.reloadCatalog();
+        }
+      });
+    }
+    else {
+      alert('Действие отменено')
+    }
   }
 }

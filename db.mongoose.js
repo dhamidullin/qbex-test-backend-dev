@@ -28,7 +28,7 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             default: 'user'
         },
         basket: {
-            type: Array,
+            type: Array, // ids of products
             default: []
         }
     });
@@ -53,9 +53,13 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
         price: {
             type: Number
         },
-        tags: {
-            type: Array,
-            default: []
+        createdDate: {
+            type: Date,
+            default: Date.now
+        },
+        updatedDate: {
+            type: Date,
+            default: Date.now
         }
     });
 
@@ -80,14 +84,19 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             callback(err);
         });
     }
+    exports.getCatalog = (query, callback) => {
+        ProductModel.find(query, (err, docs) => {
+            callback(err, docs);
+        });
+    }
     exports.getOneProductByLink = (link, callback) => {
         ProductModel.findOne({ link: link }, (err, doc) => {
             callback(err, doc);
         });
     }
-    exports.getCatalog = (query, callback) => {
-        ProductModel.find(query, (err, docs) => {
-            callback(err, docs);
+    exports.deleteOneProductByLink = (link, callback) => {
+        ProductModel.remove({ link: link }, (err) => {
+            callback(err);
         });
     }
 

@@ -92,4 +92,17 @@ module.exports = function (app, db, passport) {
             }));
         });
     });
+
+    app.delete('/product:link', (req, res, next) => {
+        var link = req.params.link;
+        console.log('delete ' + link)
+        db.deleteOneProductByLink(link, (err) => {
+            if (err)
+                return console.log(err)
+            else
+                res.end(JSON.stringify({
+                    err: false
+                }));
+        });
+    })
 };

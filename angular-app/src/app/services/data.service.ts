@@ -6,7 +6,9 @@ import { HttpService } from './http.service';
 })
 export class DataService {
 
-  public username: string = 'qwerty';
+  public ShortDescriptionSymbolsCount: Number = 135;
+
+  public username: string = "null";
   public isAdmin: boolean = true;
 
   constructor(
