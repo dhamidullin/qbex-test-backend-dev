@@ -1,10 +1,11 @@
-import { Injectable } from'@angular/core';
-import { Http, Response } from'@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { HttpParams } from '@angular/common/http';
 
-import { UserInfo } from'../classes/user-info'
+import { UserInfo } from '../classes/user-info'
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
 export class HttpService {
 
@@ -30,11 +31,16 @@ export class HttpService {
     return this.http.get('/isAuthenticated');
   }
 
-  getCatalog(query: Object) {
-    return this.http.get('/getCatalog', query);
+  getCatalog(query: object) {
+    return this.http.get('/getCatalog');
   }
 
-  // addProduct(product: any) { }
+  // addProduct
+
+  updateProduct(product: any) {
+    console.log(product);
+    return this.http.put('/updateProduct', { product: product });
+  }
 
   getProduct(link: String) {
     return this.http.get('/getProductByLink' + link);

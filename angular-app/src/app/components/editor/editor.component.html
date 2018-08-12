@@ -15,7 +15,8 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="link">Ссылка</span>
     </div>
-    <input [(ngModel)]="product.link" placeholder="Используется как часть URL ссылки на товар" type="text" class="form-control" aria-describedby="link">
+    <input [(ngModel)]="product.link" placeholder="Используется как часть URL ссылки на товар" type="text" class="form-control"
+      aria-describedby="link">
   </div>
 
   <div class="input-group mb-3">
@@ -28,8 +29,8 @@
   <div class="form-group">
     <label for="short_description">Короткое описание (Осталось символов: {{dataService.ShortDescriptionSymbolsCount - product.short_description.length}})</label>
 
-    <textarea [(ngModel)]="product.short_description" placeholder="Отображается в каталоге, можно оставить пустым" type="text" rows="4" maxlength="{{dataService.ShortDescriptionSymbolsCount}}"
-      class="form-control" id="short_description">
+    <textarea [(ngModel)]="product.short_description" placeholder="Отображается в каталоге, можно оставить пустым" type="text"
+      rows="4" maxlength="{{dataService.ShortDescriptionSymbolsCount}}" class="form-control" id="short_description">
     </textarea>
   </div>
 
@@ -72,8 +73,13 @@
       <div class="input-group-prepend">
         <button (click)="addImageUrl()" class="btn btn-outline-secondary" type="button">Добавить</button>
       </div>
-      <input [(ngModel)]="imageUrlBuffer" type="text" class="form-control" placeholder="Можно поочередно добавить несколько ссылок на картинки, первая будет главной" aria-label="" aria-describedby="basic-addon1">
+      <input [(ngModel)]="imageUrlBuffer" type="text" class="form-control" placeholder="Можно поочередно добавить несколько ссылок на картинки, первая будет главной"
+        aria-label="" aria-describedby="basic-addon1">
     </div>
+
+    <button class="btn btn-primary" (click)="updateProduct()">
+      Обновить
+    </button>
 
   </div>
 </div>
