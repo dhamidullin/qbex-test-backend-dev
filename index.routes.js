@@ -42,7 +42,8 @@ module.exports = function (app, db, passport) {
 
     app.get("/logout", (req, res, next) => {
         req.session.destroy();
-        req.logout();
+        // req.logout();
+        req.logOut();
         res.end(JSON.stringify({
             err: false
         }));
@@ -57,12 +58,34 @@ module.exports = function (app, db, passport) {
             res.end(JSON.stringify({
                 user: {
                     username: req.user.username,
-                    access_rights: req.user.access_rights
+                    admin: (req.user.access_rights == 'admin')
                 }
             }));
         else
             res.end(JSON.stringify({
-                user: null
+                username: null,
+                admin: false
             }));
+    });
+
+    app.get('/getCatalog', (req, res, next) => {
+        var query = req.query.query;
+        db.getCatalog(query, (err, docs) => {
+            res.end(JSON.stringify({
+                catalog: docs
+            }));
+        })
+    });
+
+    app.get('/getProductByLink:link', (req, res, next) => {
+        var link = req.params.link;
+        db.getOneProductByLink(link, (err, doc) => {
+            console.log(link);
+            console.log(err);
+            console.log(doc);
+            res.end(JSON.stringify({
+                product: doc
+            }));
+        });
     });
 };

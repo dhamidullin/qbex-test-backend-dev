@@ -1,2 +1,35 @@
+div.query-params-bar
+    margin: 5px 10px
+    user-select: none
+
 div.catalog-cards-list
-    margin-top: 10px
+    margin-top: 5px
+
+
+table
+    div.background-image-container
+        height: 48px
+        width: 64px
+        div.background-image
+            z-index: 50
+            user-select: none
+            height: 48px
+            width: 64px
+            background-repeat: no-repeat
+            background-attachment: local
+            background-position: center
+            background-size: contain
+            background-color: white
+    div.background-image-container:active    
+        div.background-image
+            position: fixed
+            top: 50%
+            left: 50%
+            right: 50%
+            bottom: 50%
+            height: 50%
+            margin-top: -25%
+            width: 50%
+            margin-left: -25%
+
+            border: 3px dashed lightgray

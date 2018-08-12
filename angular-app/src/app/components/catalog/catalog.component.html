@@ -1,5 +1,55 @@
-<div class="row catalog-cards-list">
+<p>value: {{helloText}}</p>
+<div class="row query-params-bar">
 
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input" [(ngModel)]="rowDisplay"> В виде списка
+    </label>
+  </div>
+
+</div>
+
+<div *ngIf="rowDisplay == true" class="catalog-cards-list">
+  <table class="table">
+
+    <thead>
+      <tr>
+        <th scope="col">Фото</th>
+        <th scope="col">Название</th>
+        <th scope="col">Цена</th>
+        <th *ngIf="admin" scope="col">Действия</th>
+      </tr>
+    </thead>
+
+    <tbody *ngIf="catalog !== null">
+      <tr *ngFor="let prod of catalog">
+
+        <td>
+          <div class="background-image-container">
+            <div class="background-image" [style.background-image]="'url(' + prod.images[0] + ')'"></div>
+          </div>
+        </td>
+
+        <td>
+          <a [routerLink]="['/catalog/' + prod.link]" innerHTML="{{prod.title}}"></a>
+        </td>
+
+        <td>
+          <span innerHTML="{{prod.price / 100}} &#8372;"></span>
+        </td>
+
+        <td *ngIf="admin">
+          ---
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
+
+<div *ngIf="rowDisplay == false" class="row catalog-cards-list">
   <div *ngFor="let prod of catalog" class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-2">
     <figure class="card card-product">
       <div class="img-wrap">
@@ -26,7 +76,4 @@
     </figure>
   </div>
   <!-- col // -->
-
-
-
 </div>

@@ -80,26 +80,6 @@ passport.use('localStrategy', localStrategy);
 
 require('./index.routes')(app, db, passport);
 
-app.get('/getCatalog', (req, res, next) => {
-    var query = req.query.query;
-    db.getCatalog(query, (err, docs) => {
-        res.end(JSON.stringify({
-            catalog: docs
-        }));
-    })
-});
-
-app.get('/getProductByLink:link', (req, res, next) => {
-    var link = req.params.link;
-    db.getOneProductByLink(link, (err, doc) => {
-        console.log(link);
-        console.log(err);
-        console.log(doc);
-        res.end(JSON.stringify({
-            product: doc
-        }));
-    });
-});
 
 
 

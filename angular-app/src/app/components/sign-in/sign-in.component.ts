@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserInfo } from '../../classes/user-info';
 import { HttpService } from '../../services/http.service';
+import { EventsService } from '../../services/events.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,7 +19,8 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private httpService: HttpService,
-    private router: Router
+    private router: Router,
+    private eventsService: EventsService
   ) { }
 
   ngOnInit() { }
@@ -28,8 +30,9 @@ export class SignInComponent implements OnInit {
       var err = data.json().err
       if (err)
         return alert(err);
-      alert("Вход выполнен! \n Переадресация на главную страницу.");
-      this.router.navigate(["/home"]);
+      alert('Вход выполнен! \n Переадресация на главную страницу.');
+      this.eventsService.reloadUser();
+      this.router.navigate(['/']);
     });
   }
 }
