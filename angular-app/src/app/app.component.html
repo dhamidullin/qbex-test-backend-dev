@@ -28,15 +28,16 @@
       <u>войдите в личный кабинет.</u>
     </button> -->
 
-    <div *ngIf="dataServce.username == null" class="text-white">
+    <div *ngIf="dataService.username == null" class="text-white">
       Здравствуйте,
       <a [routerLink]="'sign-in'">войдите в личный кабинет</a>
     </div>
 
-    <div *ngIf="dataServce.username != null" class="dropdown">
-      <button type="button" class="btn btn-outline-primary dropdown-toggle" [ngClass]="{'btn-outline-danger': dataServce.admin}" data-toggle="dropdown">
+    <div *ngIf="dataService.username != null" class="dropdown">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" [ngClass]="{'btn-outline-danger': dataService.isAdmin}"
+        data-toggle="dropdown">
         Здравствуйте,
-        <span *ngIf="dataServce.admin">Админ</span> {{dataServce.username}}
+        <span *ngIf="dataService.isAdmin">Админ</span> {{dataService.username}}
       </button>
       <div class="dropdown-menu">
         <a class="dropdown-item" [routerLink]="" (click)="logout()">Выход</a>
@@ -51,7 +52,7 @@
   <router-outlet></router-outlet>
 </div>
 
-<app-basket [ngClass]="{'display-basket-true' : displayBasket == true, 'display-basket-false' : displayBasket == false}"></app-basket>
+<!-- <app-basket [ngClass]="{'display-basket-true' : displayBasket == true, 'display-basket-false' : displayBasket == false}"></app-basket> -->
 <style>
   .display-basket-true {
     display: block

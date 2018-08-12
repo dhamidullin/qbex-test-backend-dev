@@ -60,14 +60,14 @@ module.exports = function (app, db, passport) {
             res.end(JSON.stringify({
                 user: {
                     username: req.user.username,
-                    admin: (req.user.access_rights == 'admin')
+                    isAdmin: (req.user.access_rights == 'admin')
                 }
             }));
         else
             res.end(JSON.stringify({
                 user: {
                     username: null,
-                    admin: false
+                    isAdmin: false
                 }
             }));
     });

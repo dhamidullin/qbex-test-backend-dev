@@ -4,6 +4,9 @@ import { Injectable, Input, Output, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class EventsService {
+  /**
+   * временно не используется
+   */
 
   constructor() { }
 

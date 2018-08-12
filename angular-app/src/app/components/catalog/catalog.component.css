@@ -42,4 +42,8 @@ table div.background-image-container:active div.background-image {
   margin-left: -25%;
   border: 3px dashed lightgray;
 }
+
+table td.admins-buttons div.btn-group {
+  display: inline-block;
+}
 /*# sourceMappingURL=catalog.component.css.map */

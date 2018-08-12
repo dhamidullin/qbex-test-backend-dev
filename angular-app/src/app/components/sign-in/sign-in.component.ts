@@ -33,8 +33,7 @@ export class SignInComponent implements OnInit {
       if (err)
         return alert(err);
       alert('Вход выполнен! \n Переадресация на главную страницу.');
-      // this.eventsService.reloadUser(); // перезагрузка юзера через ивент
-      this.dataService.reloadUser();  // перезагрузка юзера через data service
+      this.dataService.reloadUser();
       this.router.navigate(['/']);
     });
   }

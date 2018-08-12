@@ -7,7 +7,7 @@ import { HttpService } from './http.service';
 export class DataService {
 
   public username: string = null;
-  public admin: boolean = false;
+  public isAdmin: boolean = false;
 
   constructor(
     private httpService: HttpService
@@ -16,7 +16,7 @@ export class DataService {
   reloadUser() {
     this.httpService.getUserObject().subscribe(data => {
       this.username = data.json().user.username;
-      this.admin = data.json().user.admin;
+      this.isAdmin = data.json().user.isAdmin;
     });
   }
 
