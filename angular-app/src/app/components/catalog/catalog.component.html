@@ -1,4 +1,3 @@
-<p>value: {{helloText}}</p>
 <div class="row query-params-bar">
 
   <div class="form-check">
@@ -31,7 +30,7 @@
         </td>
 
         <td>
-          <a [routerLink]="['/catalog/' + prod.link]" innerHTML="{{prod.title}}"></a>
+          <a [routerLink]="'product/' + prod.link" innerHTML="{{prod.title}}"></a>
         </td>
 
         <td>
@@ -40,10 +39,10 @@
 
         <td *ngIf="dataService.isAdmin" class="admins-buttons">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-outline-secondary">
+            <a [routerLink]="'editProduct/' + prod.link" class="btn btn-outline-secondary">
               <i class="fas fa-edit"></i> Edit
-            </button>
-            <button type="button" class="btn btn-outline-secondary">
+            </a>
+            <button class="btn btn-outline-secondary" (click)="deleteProduct(prod.link)">
               <i class="far fa-trash-alt"></i> Delete
             </button>
           </div>

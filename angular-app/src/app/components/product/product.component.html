@@ -54,7 +54,8 @@
       <!-- <div class="spacer"></div> -->
       <div class="buy-panel">
         <span class="price text-success">{{product.price / 100}} &#8372;</span>
-        <button type="button" class="btn btn-outline-primary">
+        <button type="button" class="btn btn-outline-primary"
+         [ngClass]="{'disabled': dataService.username == null}">
           <i class="fas fa-shopping-basket"></i> Купить
         </button>
       </div>

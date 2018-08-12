@@ -6,8 +6,8 @@ import { HttpService } from './http.service';
 })
 export class DataService {
 
-  public username: string = null;
-  public isAdmin: boolean = false;
+  public username: string = 'qwerty';
+  public isAdmin: boolean = true;
 
   constructor(
     private httpService: HttpService

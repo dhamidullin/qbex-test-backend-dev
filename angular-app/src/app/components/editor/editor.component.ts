@@ -4,14 +4,15 @@ import { HttpService } from '../../services/http.service';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: 'app-editor',
+  templateUrl: './editor.component.html',
+  styleUrls: ['./editor.component.css']
 })
-export class ProductComponent implements OnInit {
+export class EditorComponent implements OnInit {
 
   product: any = null;
   link: string = null;
+  creatorMode: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -19,12 +20,13 @@ export class ProductComponent implements OnInit {
     private dataService: DataService
   ) { }
 
-
   ngOnInit() {
 
     this.link = this.activatedRoute.snapshot.params['link'];
 
-
+    if (!this.link) {
+      this.creatorMode = true;
+    }
     // this.httpService.getProduct(this.link).subscribe(data => {
     //   this.product = data.json().product;
     //   console.log(data.json());
@@ -45,4 +47,5 @@ export class ProductComponent implements OnInit {
       price: 149999
     };
   }
+
 }

@@ -9,6 +9,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AboutComponent } from './components/about/about.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { EditorComponent } from './components/editor/editor.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProductComponent } from './components/product/product.component';
@@ -49,7 +50,17 @@ const appRoutes: Routes = [
     component: CatalogComponent
   },
   {
-    path: 'catalog/:link',
+    path: 'catalog/createProduct',
+    component: EditorComponent,
+    canActivate: [OnlyAdminGuard]
+  },
+  {
+    path: 'catalog/editProduct/:link',
+    component: EditorComponent,
+    canActivate: [OnlyAdminGuard]
+  },
+  {
+    path: 'catalog/product/:link',
     component: ProductComponent
   },
   {
@@ -86,6 +97,7 @@ const appRoutes: Routes = [
     SignInComponent,
     SignUpComponent,
     AboutComponent,
+    EditorComponent,
     BasketComponent
   ],
   imports: [
