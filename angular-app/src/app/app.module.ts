@@ -64,6 +64,10 @@ const appRoutes: Routes = [
   {
     path: 'admin', canActivate: [OnlyAdminGuard], children: [
       {
+        path: '',
+        component: AdminComponent
+      },
+      {
         path: 'editProduct/:link', component: EditorComponent
       },
       {

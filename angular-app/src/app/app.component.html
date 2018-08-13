@@ -13,6 +13,9 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="" (click)="dataService.showBasket = true">Корзина</a>
       </li>
+      <li *ngIf="dataService.isAdmin" class="nav-item">
+        <a class="nav-link" [routerLink]="'/admin'">Админ-меню</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="'/about'">О нас</a>
       </li>
