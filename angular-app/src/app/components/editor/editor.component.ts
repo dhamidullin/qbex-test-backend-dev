@@ -19,6 +19,8 @@ export class EditorComponent implements OnInit {
         price: null,
         updatedDate: null
     };
+    productjson: string = '';
+
     link: string = null;
     creatorMode: boolean = false;
     imageUrlBuffer: String = '';
@@ -33,16 +35,20 @@ export class EditorComponent implements OnInit {
 
     ngOnInit() {
 
+        setInterval(() => {
+            this.productjson = JSON.stringify(this.product);
+        }, 1000);
+
         this.link = this.activatedRoute.snapshot.params['link'];
 
         if (!this.link) {
             this.creatorMode = true;
         }
-        this.httpService.getProduct(this.link).subscribe(data => {
-            this.product = data.json().product;
-            this.product.updatedDate = Date.now();
-            console.log(data.json());
-        });
+        else
+            this.httpService.getProduct(this.link).subscribe(data => {
+                this.product = data.json().product;
+                this.product.updatedDate = Date.now();
+            });
     }
 
     addImageUrl() {
@@ -54,8 +60,26 @@ export class EditorComponent implements OnInit {
     }
     updateProduct() {
         if (confirm('Точно обновить?')) {
-            // this.httpService.updateProduct(this.link, this.product);
-            // this.router.navigate(['/catalog/product/' + this.link]);
+            this.httpService.updateProduct(this.product).subscribe(data => {
+                if (data.json().err == false) {
+                    this.router.navigate(['/catalog/' + this.product.link]);
+                }
+                else {
+                    alert(data.json().err);
+                }
+            });
+        }
+    }
+    addProduct() {
+        if (confirm('Точно добавить?')) {
+            this.httpService.addProduct(this.product).subscribe(data => {
+                if (data.json().err == false) {
+                    this.router.navigate(['/catalog/' + this.product.link]);
+                }
+                else {
+                    alert(data.json().err);
+                }
+            });
         }
     }
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     path: 'home',
     component: HomeComponent
   },
+
   {
     path: 'catalog',
     component: CatalogComponent
@@ -63,6 +65,7 @@ const appRoutes: Routes = [
     path: 'catalog/product/:link',
     component: ProductComponent
   },
+
   {
     path: 'sign-in',
     component: SignInComponent
@@ -71,15 +74,11 @@ const appRoutes: Routes = [
     path: 'sign-up',
     component: SignUpComponent
   },
+
   {
     path: 'about',
     component: AboutComponent
   },
-  // {
-  //   path: 'admin',
-  //   canActivate: [OnlyAdminGuard],
-  //   component: AdminComponent
-  // },
   {
     path: '**',
     component: NotFoundComponent
@@ -105,7 +104,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule,
     HttpModule,
-    EditorModule
+    EditorModule,
+    HttpClientModule
   ],
   providers: [OnlyAdminGuard],
   bootstrap: [AppComponent]

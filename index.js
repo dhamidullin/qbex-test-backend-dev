@@ -38,22 +38,11 @@ passport.use('localStrategy', new LocalStrategy(
     {
         usernameField: 'username',
         passwordField: 'password',
-        passReqToCallback: true,
-        //session: false,
+        passReqToCallback: true
     },
     (req, username, password, done) => {
-        // console.log('Работает LocalStrategy');
-        // console.log('username: ' + username);
-        // console.log('password: ' + password);
-
-        // найти и проверить юзера
-        // обработать ошибки
-        // done('логинопароль ошибочен', false);
-        // done(null, userObject);
 
         db.getOneUserByUsername(username, (err, user) => {
-            // console.log('user');
-            // console.log(user);
 
             if (err) {
                 console.log('Ошибка базы данных');
@@ -77,82 +66,72 @@ passport.use('localStrategy', new LocalStrategy(
     }
 ));
 
-
-
-
-
-
-app.post("/sign-up", (req, res) => {
-    if (req.isAuthenticated())
-        return res.end(JSON.stringify({ err: "Вы уже выполнили вход." }));
-    console.log("Работает app.post /registration");
-    db.addUser(req.body, (err) => {
-        console.log("console.log here");
-        console.log(err);
-        if (err) {
-            if (err.code == 11000)
-                return res.end(JSON.stringify({ err: "Такой пользователь уже существует, смените username" }));
-            return res.end(JSON.stringify({ err: "Ошибка базы данных, попробуйте позже" }));
-        }
-        return res.end(JSON.stringify({ err: false }));
-    });
+app.use((req, res, next) => {
+    console.log(req.method + ' ' + req.url);
+    next();
 });
 
-app.post('/sign-in', (req, res, next) => {
-    if (req.isAuthenticated())
-        return res.end(JSON.stringify({ err: "Вы уже выполнили вход." }));
-    passport.authenticate('localStrategy', (err, user) => {
-        console.log("err");
-        console.log(err);
-        console.log("user");
-        console.log(user);
-
-        if (err)
-            return res.end(JSON.stringify({ err: err }));
-
-        // этот метод необходим при использовании кастомной callback функции 
-        req.logIn(user, (err) => {
+(function () {
+    app.post("/sign-up", (req, res) => {
+        if (req.isAuthenticated())
+            return res.end(JSON.stringify({ err: "Вы уже выполнили вход." }));
+        db.addUser(req.body, (err) => {
             if (err)
-                return res.send(JSON.stringify({ err: 'Error while login, please, try later' }));
-            else
-                return res.send(JSON.stringify({ err: false }));
+                console.log(err);
+            if (err) {
+                if (err.code == 11000)
+                    return res.end(JSON.stringify({ err: "Такой пользователь уже существует, смените username" }));
+                return res.end(JSON.stringify({ err: "Ошибка базы данных, попробуйте позже" }));
+            }
+            return res.end(JSON.stringify({ err: false }));
         });
+    });
+    app.post('/sign-in', (req, res, next) => {
+        if (req.isAuthenticated())
+            return res.end(JSON.stringify({ err: "Вы уже выполнили вход." }));
+        passport.authenticate('localStrategy', (err, user) => {
 
-        return res.end(JSON.stringify({ err: false }));
-    })(req, res, next);
-});
+            if (err)
+                return res.end(JSON.stringify({ err: err }));
 
-app.get("/logout", (req, res, next) => {
-    req.session.destroy();
-    req.logOut();
-    res.end(JSON.stringify({
-        err: false
-    }));
-});
+            // этот метод необходим при использовании кастомной callback функции 
+            req.logIn(user, (err) => {
+                if (err)
+                    return res.send(JSON.stringify({ err: 'Error while login, please, try later' }));
+                else
+                    return res.send(JSON.stringify({ err: false }));
+            });
 
-app.get("/isAuthenticated", (req, res, next) => {
-    res.end(JSON.stringify({ isAuthenticated: req.isAuthenticated() }));
-});
-
-app.get('/userObject', (req, res, next) => {
-    console.log('getUserObject');
-    console.log(req.isAuthenticated());
-    console.log(JSON.stringify(req.user));
-    if (req.isAuthenticated())
+            return res.end(JSON.stringify({ err: false }));
+        })(req, res, next);
+    });
+    app.get("/logout", (req, res, next) => {
+        req.session.destroy();
+        req.logOut();
         res.end(JSON.stringify({
-            user: {
-                username: req.user.username,
-                isAdmin: (req.user.access_rights == 'admin')
-            }
+            err: false
         }));
-    else
-        res.end(JSON.stringify({
-            user: {
-                username: null,
-                isAdmin: false
-            }
-        }));
-});
+    });
+    app.get("/isAuthenticated", (req, res, next) => {
+        res.end(JSON.stringify({ isAuthenticated: req.isAuthenticated() }));
+    });
+    app.get('/userObject', (req, res, next) => {
+        if (req.isAuthenticated())
+            res.end(JSON.stringify({
+                user: {
+                    username: req.user.username,
+                    isAdmin: (req.user.access_rights == 'admin')
+                }
+            }));
+        else
+            res.end(JSON.stringify({
+                user: {
+                    username: null,
+                    isAdmin: false
+                }
+            }));
+    });
+})()
 
 app.get('/getCatalog', (req, res, next) => {
     var query = req.query.query;
@@ -162,22 +141,18 @@ app.get('/getCatalog', (req, res, next) => {
         }));
     })
 });
-
-app.get('/getProductByLink:link', (req, res, next) => {
-    var link = req.params.link;
+app.get('/getProductByLink', (req, res, next) => {
+    var link = req.query.link;
     db.getOneProductByLink(link, (err, doc) => {
-        console.log(link);
-        console.log(err);
-        console.log(doc);
+        if (err)
+            return console.log(err);
         res.end(JSON.stringify({
             product: doc
         }));
     });
 });
-
-app.delete('/product:link', (req, res, next) => {
-    var link = req.params.link;
-    console.log('delete ' + link)
+app.delete('/product', (req, res, next) => {
+    var link = req.query.link;
     db.deleteOneProductByLink(link, (err) => {
         if (err)
             return console.log(err)
@@ -187,17 +162,18 @@ app.delete('/product:link', (req, res, next) => {
             }));
     });
 });
-
-app.put('/updateProduct', (req, res, next) => {
+app.post('/updateProduct', (req, res, next) => {
     var product = req.body.product;
-    var link = req.query.link;
-
-    db.updateProduct(link, product, (err) => {
+    db.updateProduct(product, (err) => {
         if (err)
-            return console.log(err);
-        res.end(JSON.stringify({
-            err: false
-        }));
+            console.log(err);
+    });
+});
+app.post('/addProduct', (req, res, next) => {
+    var product = req.body.product;
+    db.addProduct(product, (err) => {
+        if (err)
+            console.log(err);
     });
 });
 

@@ -14,41 +14,33 @@ export class HttpService {
   signIn(loginData: UserInfo) {
     return this.http.post('/sign-in', loginData);
   }
-
   signUp(registrationData: UserInfo) {
     return this.http.post('/sign-up', registrationData);
   }
-
   logout() {
     return this.http.get('/logout');
   }
-
   getUserObject() {
     return this.http.get('/userObject');
   }
-
   isAuthenticated() {
     return this.http.get('/isAuthenticated');
   }
-
   getCatalog(query: object) {
     return this.http.get('/getCatalog');
   }
-
-  // addProduct
-
+  getProduct(link: String) {
+    return this.http.get('/getProductByLink', { params: { link: link } });
+  }
+  deleteProduct(link: String) {
+    return this.http.delete('/product', { params: { link: link } });
+  }
   updateProduct(product: any) {
     console.log(product);
-    return this.http.put('/updateProduct', { product: product });
+    return this.http.post('/updateProduct', { product: product });
   }
-
-  getProduct(link: String) {
-    return this.http.get('/getProductByLink' + link);
-  }
-
-  // editProduct(id: String) { }
-
-  deleteProduct(link: String) {
-    return this.http.delete('/product' + link);
+  addProduct(product: any) {
+    console.log(product);
+    return this.http.post('/addProduct', { product: product });
   }
 }
