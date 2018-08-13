@@ -8,7 +8,7 @@ export class DataService {
 
   public ShortDescriptionSymbolsCount: Number = 135;
 
-  public username: string = null;
+  public username: string = "null";
   public isAdmin: boolean = true;
   public rowDisplay: boolean = false;
   public showBasket: boolean = false;

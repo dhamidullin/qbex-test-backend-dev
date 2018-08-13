@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAEQ,KAFH,CACD,EAAE,AAAA,eAAe,CACb,GAAG,AAAA,UAAU,CAAC;EACV,OAAO,EAAE,YAAY;CAAG",
+    "sources": [
+        "users-list.component.sass"
+    ],
+    "names": [],
+    "file": "users-list.component.css"
+}

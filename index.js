@@ -125,6 +125,17 @@ app.get('/isAdmin', (req, res, next) => {
         return res.end(JSON.stringify(false));
     res.end(JSON.stringify(req.user.status == 'admin'));
 });
+app.get('/getBasket', (req, res, next) => {
+    if (!req.isAuthenticated())
+        return res.end(JSON.stringify({
+            basket: []
+        }));
+    db.getOneUserByUsername(req.user.username, (err, doc) => {
+        res.end(JSON.stringify({
+            basket: doc.basket
+        }));
+    });
+});
 
 // безопасные роуты
 app.get('/getCatalog', (req, res, next) => {
@@ -136,8 +147,16 @@ app.get('/getCatalog', (req, res, next) => {
     })
 });
 app.get('/getProductByLink', (req, res, next) => {
-    var link = req.query.link;
-    db.getOneProductByLink(link, (err, doc) => {
+    db.getOneProductByLink(req.query.link, (err, doc) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            product: doc
+        }));
+    });
+});
+app.get('/getProductById', (req, res, next) => {
+    db.getOneProductByLink(req.query.id, (err, doc) => {
         if (err)
             return console.log(err);
         res.end(JSON.stringify({
@@ -172,8 +191,33 @@ app.post('/addProduct', (req, res, next) => {
             console.log(err);
     });
 });
-
-
+app.get('/getUserList', (erq, res, next) => {
+    db.getUsersList((err, docs) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            users: docs
+        }));
+    });
+});
+app.get('/deleteProduct', (erq, res, next) => {
+    db.deleteOneProductById(req.query.id, (err) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            err: false
+        }));
+    });
+});
+app.get('/getUserObject', (req, res, next) => {
+    db.getUserObject(req.query.id, (err, doc) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            userObject: doc
+        }));
+    });
+});
 
 
 

@@ -5,6 +5,7 @@ import { UserInfo } from '../../classes/user-info';
 import { HttpService } from '../../services/http.service';
 import { EventsService } from '../../services/events.service';
 import { DataService } from '../../services/data.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,10 +23,11 @@ export class SignInComponent implements OnInit {
     private httpService: HttpService,
     private router: Router,
     private eventsService: EventsService,
-    private dataService: DataService
+    private dataService: DataService,
+    private title: Title
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {this.title.setTitle('Вход на сайт'); }
 
   login() {
     this.httpService.signIn(this.loginData).subscribe(data => {

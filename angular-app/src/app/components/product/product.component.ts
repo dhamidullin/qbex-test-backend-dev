@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { DataService } from '../../services/data.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -16,12 +17,13 @@ export class ProductComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private httpService: HttpService,
-    private dataService: DataService
+    private dataService: DataService,
+    private title: Title
   ) { }
 
 
   ngOnInit() {
-
+    this.title.setTitle('Загрузка...');
     // this.product = {
     //   title: 'Kingston SSDNow A400 240GB 2.5" SATAIII TLC (SA400S37/240G)',
     //   link: 'kingston_sa400s37_240g',
@@ -41,7 +43,7 @@ export class ProductComponent implements OnInit {
 
     this.httpService.getProduct(this.link).subscribe(data => {
       this.product = data.json().product;
-      console.log(data.json());
+      this.title.setTitle('this.product.title');
     });
   }
 }

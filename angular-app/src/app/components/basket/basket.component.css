@@ -23,6 +23,10 @@ div.overlay div.content-container div.content {
   position: relative;
 }
 
+div.overlay div.content-container div.content h2.text-warning {
+  padding: 5%;
+}
+
 div.overlay div.content-container div.content div.top-bar {
   border-bottom: 1px solid lightgray;
   padding: 3px 8px;

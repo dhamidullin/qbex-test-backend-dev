@@ -16,6 +16,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProductComponent } from './components/product/product.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { UserEditorComponent } from './components/user-editor/user-editor.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
 
 /**
  * home
@@ -46,26 +48,37 @@ const appRoutes: Routes = [
     path: 'home',
     component: HomeComponent
   },
-
   {
-    path: 'catalog',
-    component: CatalogComponent
+    path: 'products',
+    children: [
+      {
+        path: '',
+        component: CatalogComponent
+      },
+      {
+        path: ':link',
+        component: ProductComponent
+      },
+    ]
   },
   {
-    path: 'catalog/createProduct',
-    component: EditorComponent,
-    canActivate: [OnlyAdminGuard]
+    path: 'admin', canActivate: [OnlyAdminGuard], children: [
+      {
+        path: 'editProduct/:link', component: EditorComponent
+      },
+      {
+        path: 'users', children: [
+          {
+            path: '',
+            component: UsersListComponent
+          },
+          {
+            path: ':id', component: UserEditorComponent
+          }
+        ]
+      }
+    ]
   },
-  {
-    path: 'catalog/editProduct/:link',
-    component: EditorComponent,
-    canActivate: [OnlyAdminGuard]
-  },
-  {
-    path: 'catalog/product/:link',
-    component: ProductComponent
-  },
-
   {
     path: 'sign-in',
     component: SignInComponent
@@ -97,6 +110,8 @@ const appRoutes: Routes = [
     SignUpComponent,
     AboutComponent,
     EditorComponent,
+    UserEditorComponent,
+    UsersListComponent,
     BasketComponent
   ],
   imports: [
@@ -107,10 +122,8 @@ const appRoutes: Routes = [
     EditorModule,
     HttpClientModule
   ],
+  exports: [RouterModule],
   providers: [OnlyAdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-

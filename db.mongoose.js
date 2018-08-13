@@ -7,7 +7,7 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
         console('Error while creating connection');
         return console.log(err);
     }
-    mongoose.connection.db.dropDatabase();
+    // mongoose.connection.db.dropDatabase();
 
     const UserSchema = new Schema({
         username: {
@@ -79,6 +79,10 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             callback(err, doc);
         });
     }
+    exports.getUsersList = (callback) => {
+        UserModel.find({}, callback);
+    }
+
     exports.getCatalog = (query, callback) => {
         ProductModel.find(query, (err, docs) => {
             callback(err, docs);
@@ -89,8 +93,13 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             callback(err, doc);
         });
     }
-    exports.deleteOneProductByLink = (link, callback) => {
-        ProductModel.remove({ link: link }, (err) => {
+    exports.getOneProductById = (id, callback) => {
+        ProductModel.findOne({ _id: ObjectId(id) }, (err, doc) => {
+            callback(err, doc);
+        });
+    }
+    exports.deleteOneProductById = (id, callback) => {
+        ProductModel.remove({ _id: ObjectId(id) }, (err) => {
             callback(err);
         });
     }
@@ -105,14 +114,19 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             callback(err);
         });
     }
+    exports.getUserObject = (id, callback) => {
+        UserModel.findOne({ _id: ObjectId(id) }, (err, doc) => {
+            callback(err, doc);
+        });
+    }
 
-    new UserModel({
-        username: 'admin',
-        password: 'admin',
-        status: 'admin'
-    }).save(err => {
-        console.log('saved')
-        console.log(err)
-    });
+    // new UserModel({
+    //     username: 'admin',
+    //     password: 'admin',
+    //     status: 'admin'
+    // }).save(err => {
+    //     console.log('saved')
+    //     console.log(err)
+    // });
 });
 

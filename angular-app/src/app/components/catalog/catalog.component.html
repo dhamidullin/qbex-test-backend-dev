@@ -30,7 +30,7 @@
         </td>
 
         <td>
-          <a [routerLink]="'product/' + prod.link" innerHTML="{{prod.title}}"></a>
+          <a [routerLink]="prod.link" innerHTML="{{prod.title}}"></a>
         </td>
 
         <td>
@@ -39,7 +39,7 @@
 
         <td *ngIf="dataService.isAdmin" class="admins-buttons">
           <div class="btn-group" role="group" aria-label="Basic example">
-            <a [routerLink]="'editProduct/' + prod.link" class="btn btn-outline-secondary">
+            <a [routerLink]="'../admin/editProduct/' + prod.link" class="btn btn-outline-secondary">
               <i class="fas fa-edit"></i> Редактировать
             </a>
             <button class="btn btn-outline-secondary" (click)="deleteProduct(prod.link)">
@@ -63,7 +63,7 @@
       </div>
       <figcaption class="info-wrap">
         <h4 class="title">
-          <a [routerLink]="'product/' + prod.link">{{prod.title}}</a>
+          <a [routerLink]="prod.link">{{prod.title}}</a>
         </h4>
         <p *ngIf="prod.short_description !== ''" class="desc">{{prod.short_description.substring(0, dataService.ShortDescriptionSymbolsCount)}}</p>
         <div class="rating-wrap">

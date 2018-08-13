@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { DataService } from '../../services/data.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-editor',
@@ -30,11 +31,12 @@ export class EditorComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private httpService: HttpService,
         private dataService: DataService,
-        private router: Router
+        private router: Router,
+        private title: Title
     ) { }
 
     ngOnInit() {
-
+        this.title.setTitle('Редактор товара');
         setInterval(() => {
             this.productjson = JSON.stringify(this.product);
         }, 1000);

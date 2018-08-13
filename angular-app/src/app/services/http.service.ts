@@ -11,6 +11,7 @@ export class HttpService {
 
   constructor(private http: Http) { }
 
+  // логин логаут и прочее
   signIn(loginData: UserInfo) {
     return this.http.post('/sign-in', loginData);
   }
@@ -20,9 +21,6 @@ export class HttpService {
   logout() {
     return this.http.get('/logout');
   }
-  // getUserObject() {
-  //   return this.http.get('/userObject');
-  // }
   getUsername() {
     return this.http.get('/username');
   }
@@ -32,12 +30,22 @@ export class HttpService {
   isAuthenticated() {
     return this.http.get('/isAuthenticated');
   }
+  getBasket() {
+    return this.http.get('/getBasket');
+  }
+
+  // безопасные роуты
   getCatalog(query: object) {
     return this.http.get('/getCatalog');
   }
   getProduct(link: String) {
     return this.http.get('/getProductByLink', { params: { link: link } });
   }
+  getProductById(id: String) {
+    return this.http.get('/getProductById', { params: { id: id } });
+  }
+
+  // для админов 
   deleteProduct(link: String) {
     return this.http.delete('/deleteProduct', { params: { link: link } });
   }
@@ -48,5 +56,14 @@ export class HttpService {
   addProduct(product: any) {
     console.log(product);
     return this.http.post('/addProduct', { product: product });
+  }
+  getUserList() {
+    return this.http.get('/getUserList');
+  }
+  deleteUser(id: any) {
+    return this.http.delete('/deleteProduct', { params: { id: id } });
+  }
+  getUserObject(id: any) {
+    return this.http.get('/getUserObject', { params: { id: id } });
   }
 }
