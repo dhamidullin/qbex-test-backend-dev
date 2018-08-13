@@ -11,7 +11,7 @@
         <a class="nav-link" [routerLink]="'/catalog'">Каталог</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="" (click)="toggleBasket()">Корзина</a>
+        <a class="nav-link" [routerLink]="" (click)="dataService.showBasket = true">Корзина</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="'/about'">О нас</a>
@@ -52,7 +52,7 @@
   <router-outlet></router-outlet>
 </div>
 
-<!-- <app-basket [ngClass]="{'display-basket-true' : displayBasket == true, 'display-basket-false' : displayBasket == false}"></app-basket> -->
+<app-basket [ngClass]="{'display-basket-true' : dataService.showBasket, 'display-basket-false' : !dataService.showBasket}"></app-basket>
 <style>
   .display-basket-true {
     display: block

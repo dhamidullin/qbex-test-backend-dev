@@ -37,8 +37,4 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
-  toggleBasket() {
-    this.displayBasket = !this.displayBasket
-  }
 }

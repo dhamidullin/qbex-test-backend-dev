@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-basket',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasketComponent implements OnInit {
 
-  array: any = ['hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello','hello',]
+  array: any = ['hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello',]
 
-  constructor() { }
+  constructor(
+    private dataService: DataService
+  ) { }
 
   ngOnInit() {
   }

@@ -10,18 +10,19 @@ export class DataService {
 
   public username: string = null;
   public isAdmin: boolean = true;
+  public rowDisplay: boolean = false;
+  public showBasket: boolean = false;
 
   constructor(
     private httpService: HttpService
   ) { }
 
   reloadUser() {
-    this.httpService.getUserObject().subscribe(data => {
-      this.username = data.json().user.username;
-      this.isAdmin = data.json().user.isAdmin;
+    this.httpService.getUsername().subscribe(data => {
+      this.username = data.json();
+    });
+    this.httpService.getIsAdmin().subscribe(data => {
+      this.isAdmin = data.json();
     });
   }
-
-
-
 }

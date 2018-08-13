@@ -2,13 +2,13 @@
 
   <div class="form-check">
     <label class="form-check-label">
-      <input type="checkbox" class="form-check-input" [(ngModel)]="rowDisplay"> В виде списка
+      <input type="checkbox" class="form-check-input" [(ngModel)]="dataService.rowDisplay"> В виде списка
     </label>
   </div>
 
 </div>
 
-<div *ngIf="rowDisplay == true" class="catalog-cards-list">
+<div *ngIf="dataService.rowDisplay == true" class="catalog-cards-list">
   <table class="table">
 
     <thead>
@@ -55,7 +55,7 @@
 </div>
 
 
-<div *ngIf="rowDisplay == false" class="row catalog-cards-list">
+<div *ngIf="dataService.rowDisplay == false" class="row catalog-cards-list">
   <div *ngFor="let prod of catalog" class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-2">
     <figure class="card card-product">
       <div class="img-wrap">

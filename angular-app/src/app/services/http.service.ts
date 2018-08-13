@@ -20,8 +20,14 @@ export class HttpService {
   logout() {
     return this.http.get('/logout');
   }
-  getUserObject() {
-    return this.http.get('/userObject');
+  // getUserObject() {
+  //   return this.http.get('/userObject');
+  // }
+  getUsername() {
+    return this.http.get('/username');
+  }
+  getIsAdmin() {
+    return this.http.get('/isAdmin');
   }
   isAuthenticated() {
     return this.http.get('/isAuthenticated');
@@ -33,7 +39,7 @@ export class HttpService {
     return this.http.get('/getProductByLink', { params: { link: link } });
   }
   deleteProduct(link: String) {
-    return this.http.delete('/product', { params: { link: link } });
+    return this.http.delete('/deleteProduct', { params: { link: link } });
   }
   updateProduct(product: any) {
     console.log(product);

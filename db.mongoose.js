@@ -7,7 +7,7 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
         console('Error while creating connection');
         return console.log(err);
     }
-    // mongoose.connection.db.dropDatabase();
+    mongoose.connection.db.dropDatabase();
 
     const UserSchema = new Schema({
         username: {
@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             type: String,
             match: /[a-zA-Z0-9_]{5,32}/,
         },
-        access_rights: {
+        status: {
             type: String,
             enum: ['admin', 'user'],
             default: 'user'
@@ -69,7 +69,7 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
 
     exports.addUser = (user, callback) => {
         var newUser = new UserModel(user);
-        newUser.access_rights = 'user';
+        newUser.status = 'user';
         newUser.save((err) => {
             callback(err);
         });
@@ -105,4 +105,14 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             callback(err);
         });
     }
+
+    new UserModel({
+        username: 'admin',
+        password: 'admin',
+        status: 'admin'
+    }).save(err => {
+        console.log('saved')
+        console.log(err)
+    });
 });
+
