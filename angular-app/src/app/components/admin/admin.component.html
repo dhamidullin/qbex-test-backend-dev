@@ -1,6 +1,6 @@
 <div class="admin-panel">
   <div class="btn-group" role="group" aria-label="Basic example">
-    <a [routerLink]="['/products']" class="btn btn-outline-secondary">
+    <a [routerLink]="['/products']" (click)="dataService.rowDisplay=true" class="btn btn-outline-secondary">
       <i class="fas fa-folder-open"></i> Перейти в каталог товаров
     </a>
     <a [routerLink]="['/admin/users']" class="btn btn-outline-secondary">

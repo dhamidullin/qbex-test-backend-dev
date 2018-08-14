@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { Title } from '@angular/platform-browser';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,11 +16,12 @@ export class AdminComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private httpService: HttpService,
-    private title: Title
+    private title: Title,
+    private dataService: DataService,
+    private router: Router
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.title.setTitle('Админ-панель');
   }
-
 }
