@@ -36,6 +36,7 @@ import { UsersListComponent } from './components/users-list/users-list.component
 
 import { OnlyAdminGuard } from './guards/only-admin.guard';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { OrdersComponent } from './components/orders/orders.component';
 
 const appRoutes: Routes = [
   {
@@ -71,6 +72,9 @@ const appRoutes: Routes = [
       {
         path: 'addProduct', component: EditorComponent
       },
+      // {
+      //   path: 'orders', // component:
+      // },
       {
         path: 'users', children: [
           {
@@ -119,6 +123,7 @@ const appRoutes: Routes = [
     EditorComponent,
     UserEditorComponent,
     UsersListComponent,
+    OrdersComponent,
     BasketComponent
   ],
   imports: [

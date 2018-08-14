@@ -11,6 +11,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class BasketComponent implements OnInit {
 
+  totalPrice: number = null;
   basket_ids: string[] = [];
   products: any[] = [];
 
@@ -45,15 +46,33 @@ export class BasketComponent implements OnInit {
             console.log(this.basket_ids.filter(x => x === product._id).length);
           });
           this.products = productsCache;
+
+          this.totalPrice = 0;
+          this.products.forEach(product => {
+            this.totalPrice += product.price * product.count
+          })
         });
       }
     });
   }
   remooveFromBasket(id: string) {
     this.httpService.remooveFromBasket(id).subscribe(data => {
-      // console.log(data.json())
       if (data.json().err == false)
         this.refreshBasket();
     });
   }
+  remooveAllFromBasket() {
+    this.httpService.remooveAllFromBasket().subscribe(data => {
+      if (data.json().err == false)
+        this.refreshBasket();
+    });
+  }
+  makeOrder() {
+    if (confirm('Точно ?'))
+      this.httpService.makeOrder().subscribe(data => {
+        if (data.json().err == false)
+          alert('Заказ отправлен админу...');
+      });
+  }
+
 }

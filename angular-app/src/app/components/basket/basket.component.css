@@ -23,6 +23,10 @@ div.overlay div.content-container div.content {
   position: relative;
 }
 
+div.overlay div.content-container div.content .btn-outline-success {
+  margin: 5px 10px;
+}
+
 div.overlay div.content-container div.content h2.text-warning {
   padding: 5%;
 }

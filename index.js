@@ -1,3 +1,5 @@
+global.log = global.console.log
+
 const port = 80;
 const express = require('express');
 const passport = require('passport');
@@ -76,7 +78,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// регистрация и прочее для юзера
+// для юзера
 app.post("/sign-up", (req, res) => {
     if (req.isAuthenticated())
         return res.end(JSON.stringify({ err: "Вы уже выполнили вход." }));
@@ -174,7 +176,26 @@ app.get('/remooveFromBasket', (req, res, next) => {
             err: false
         }));
     });
-})
+});
+app.get('/remooveAllFromBasket', (req, res, next) => {
+    db.remooveAllFromBasket(req.user._id, (err, row) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            err: false
+        }));
+    });
+});
+app.get('/makeOrder', (req, res, next) => {
+    db.makeOrder(req.user._id, (err) => {
+        if (err)
+            return console.log(err);
+        console.log('made order');
+        res.end(JSON.stringify({
+            err: false
+        }));
+    })
+});
 
 // безопасные роуты
 app.get('/getCatalog', (req, res, next) => {

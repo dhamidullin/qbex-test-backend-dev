@@ -32,7 +32,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let product of products, let i = index ">
+          <tr *ngFor="let product of products, let i = index">
 
             <td>
               {{i + 1}}
@@ -65,10 +65,25 @@
             </td>
 
           </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{totalPrice / 100}} &#8372;</td>
+            <td>
+              <button class="btn btn-outline-secondary" (click)="remooveAllFromBasket()">
+                <i class="far fa-trash-alt"></i> Убрать все
+              </button>
+            </td>
+          </tr>
         </tbody>
 
       </table>
 
+      <button *ngIf="products.length" class="btn btn-outline-success" (click)="makeOrder()">
+        <i class="fas fa-check"></i> Оформить заказ
+      </button>
 
     </div>
   </div>

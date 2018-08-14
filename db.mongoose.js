@@ -28,6 +28,10 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
         basket: {
             type: Array, // ids of products
             default: []
+        },
+        registerDate: {
+            type: Date,
+            default: Date.now()
         }
     });
     const ProductSchema = new Schema({
@@ -56,16 +60,31 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
         },
         createdDate: {
             type: Date,
-            default: Date.now
+            default: Date.now()
         },
         updatedDate: {
             type: Date,
-            default: Date.now
+            default: Date.now()
+        }
+    });
+    const OrderSchema = new Schema({
+        user_id: {
+            type: String,
+            unique: false
+        },
+        product_ids: {
+            type: [String],
+            unique: false
+        },
+        createdDate: {
+            type: Date,
+            default: Date.now()
         }
     });
 
     const UserModel = mongoose.model('UserModel', UserSchema, 'users');
     const ProductModel = mongoose.model('ProductModel', ProductSchema, 'products');
+    const OrderModel = mongoose.model('OrderModel', OrderSchema, 'orders');
 
     exports.addUser = (user, callback) => {
         var newUser = new UserModel(user);
@@ -118,6 +137,11 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             });
         });
     }
+    exports.remooveAllFromBasket = (idOfUser, callback) => {
+        UserModel.findByIdAndUpdate({ _id: ObjectId(idOfUser) }, { $set: { basket: [] } }, (err, row) => {
+            callback(err, row)
+        });
+    }
     exports.getCatalog = (query, callback) => {
         ProductModel.find(query, (err, docs) => {
             callback(err, docs);
@@ -163,6 +187,23 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     exports.getUserObject = (id, callback) => {
         UserModel.findOne({ _id: ObjectId(id) }, (err, doc) => {
             callback(err, doc);
+        });
+    }
+    exports.makeOrder = (id, callback) => {
+        UserModel.findOne({ _id: ObjectId(id) }, (err, user) => {
+            var basket = user.basket;
+            user.basket = [];
+            user.save((err) => {
+                if (err)
+                    return console.log(err);
+
+                new OrderModel({
+                    user_id: id,
+                    product_ids: basket
+                }).save((err) => {
+                    callback(err);
+                });
+            });
         });
     }
 

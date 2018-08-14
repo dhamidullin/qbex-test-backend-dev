@@ -11,7 +11,7 @@ export class HttpService {
 
   constructor(private http: Http) { }
 
-  // логин логаут и прочее для юзера
+  // для юзера
   signIn(loginData: UserInfo) {
     return this.http.post('/sign-in', loginData);
   }
@@ -38,6 +38,12 @@ export class HttpService {
   }
   addToBasket(id: any) {
     return this.http.get('/addToBasket', { params: { id: id } });
+  }
+  makeOrder() {
+    return this.http.get('/makeOrder');
+  }
+  remooveAllFromBasket() {
+    return this.http.get('/remooveAllFromBasket');
   }
 
   // безопасные роуты
