@@ -88,29 +88,9 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
         });
     }
     exports.addToBasket = (idOfUser, idOfProduct, callback) => {
-
-
         UserModel.updateOne({ _id: ObjectId(idOfUser) }, { $push: { basket: idOfProduct } }, (err, row) => {
             callback(err, row)
         });
-
-
-
-        // UserModel.findOne({ _id: ObjectId(idOfUser) }, (err, user) => {
-        //     if (err)
-        //         return console.log(err)
-        //     user.set({ $push: { basket: idOfProduct } });
-        //     user.save((err, savedUser) => {
-        //         if (err)
-        //             return console.log(err)
-        //         console.log(savedUser);
-        //     });
-        // });
-
-
-        // UserModel.update({ _id: ObjectId(idOfUser) }, { $push: { basket: idOfProduct } }, (err, raw) => {
-        //     callback(err, raw);
-        // });
     }
 
     exports.getCatalog = (query, callback) => {
@@ -126,6 +106,17 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     exports.getOneProductById = (id, callback) => {
         ProductModel.findOne({ _id: ObjectId(id) }, (err, doc) => {
             callback(err, doc);
+        });
+    }
+    exports.getProductsByManyIds = (ids, callback) => {
+        var objectsIdsArray = [];
+
+        ids.forEach(element => {
+            objectsIdsArray.push(ObjectId(element));
+        });
+
+        ProductModel.find({ '_id': { $in: objectsIdsArray } }, (err, products) => {
+            callback(err, products);
         });
     }
     exports.deleteOneProductById = (id, callback) => {

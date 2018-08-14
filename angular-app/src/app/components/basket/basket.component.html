@@ -10,21 +10,57 @@
         Войдите в аккаунт, чтобы получить доступ к корзине
       </h2>
 
-      <h2 *ngIf="!products.length && dataService.username" class="text-warning text-center">
+      <h2 *ngIf="dataService.username && !products.length" class="text-warning text-center">
         Корзина пуста...
       </h2>
+      <!-- 
+      {{basket_ids}}
+      <br> {{productsJson}} -->
 
-      <table *ngIf="dataService.username && products.length">
-        <tr *ngFor="let hi of array, let i = index">
-          <td>
-            {{i}}
-          </td>
-          <td>
-            {{hi}}
-          </td>
-        </tr>
+
+      <table *ngIf="products.length" class=" table ">
+
+        <thead>
+          <tr>
+            <th scope="col ">№</th>
+            <th scope="col ">Название</th>
+            <th scope="col ">Цена</th>
+            <th scope="col ">Количество</th>
+            <th scope="col ">Итого</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let product of products, let i = index ">
+
+            <td>
+              {{i + 1}}
+            </td>
+
+            <td>
+              <h5>
+                <!-- <a [routerLink]="[ 'http://localhost/products/' + product.link] " (click)="dataService.showBasket=false "> -->
+                {{product.title}}
+                <!-- </a> -->
+              </h5>
+            </td>
+
+            <td>
+              <span>{{product.price / 100}} &#8372;</span>
+            </td>
+
+            <td>
+              {{product.count}}
+            </td>
+
+            <td>
+              {{product.count * product.price / 100}} &#8372;
+            </td>
+
+          </tr>
+        </tbody>
+
       </table>
-
 
 
     </div>

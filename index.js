@@ -111,7 +111,6 @@ app.post('/sign-in', (req, res, next) => {
     })(req, res, next);
 });
 app.get("/logout", (req, res, next) => {
-    console.log(req.isAdmin);
     req.session.destroy();
     req.logOut();
     res.end(JSON.stringify({
@@ -163,11 +162,25 @@ app.get('/getProductByLink', (req, res, next) => {
     });
 });
 app.get('/getProductById', (req, res, next) => {
-    db.getOneProductByLink(req.query.id, (err, doc) => {
+    db.getOneProductById(req.query.id, (err, product) => {
         if (err)
             return console.log(err);
         res.end(JSON.stringify({
-            product: doc
+            product: product
+        }));
+    });
+});
+app.get('/getProductsByManyIds', (req, res, next) => {
+    console.log(req.query);
+    if (!req.isAuthenticated())
+        res.end(JSON.stringify({
+            products: []
+        }));
+    db.getProductsByManyIds(req.query.ids, (err, products) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            products: products
         }));
     });
 });

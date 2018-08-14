@@ -50,6 +50,9 @@ export class HttpService {
   addToBasket(id: any) {
     return this.http.get('/addToBasket', { params: { id: id } });
   }
+  getProductsByManyIds(ids: string[]) {
+    return this.http.get('/getProductsByManyIds', { params: { ids: ids } });
+  }
 
   // для админов 
   deleteProduct(link: String) {

@@ -46,11 +46,11 @@
             <i class="fas fa-shopping-basket"></i> Купить
           </span>
           <span *ngIf="inBasket">
-            <i class="fas fa-check"></i> Добавить
+            <i class="fas fa-check"></i> Добавить еще
           </span>
         </button>
-
-        <span *ngIf="inBasket" class="inBasket text-success">В корзине: {{inBasket}} шт.</span>
+        <br *ngIf="inBasket">
+        <span *ngIf="inBasket" class="inBasket text-success">В корзине: {{inBasket}} шт. на {{product.price / 100 * inBasket}} &#8372;</span>
 
       </div>
     </div>

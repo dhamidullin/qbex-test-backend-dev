@@ -49,8 +49,6 @@ div.overlay div.content-container div.content div.top-bar i:hover {
 }
 
 div.overlay div.content-container div.content table {
-  position: absolute;
-  left: 2%;
-  right: 2%;
+  padding: 1%;
 }
 /*# sourceMappingURL=basket.component.css.map */
