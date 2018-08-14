@@ -26,7 +26,11 @@ app.use(passport.session());
 
 passport.serializeUser((user, done) => {
     // определяет какие данные сохраняются в req.user
-    done(null, user);
+    done(null, {
+        username: user.username,
+        _id: user._id,
+        status: user.status
+    });
 });
 passport.deserializeUser((user, done) => {
     // console.log(user);
