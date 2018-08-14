@@ -72,9 +72,9 @@ const appRoutes: Routes = [
       {
         path: 'addProduct', component: EditorComponent
       },
-      // {
-      //   path: 'orders', // component:
-      // },
+      {
+        path: 'orders', component: OrdersComponent
+      },
       {
         path: 'users', children: [
           {
