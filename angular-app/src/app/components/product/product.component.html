@@ -1,17 +1,3 @@
-<!-- <p>
-  product = {{product}}
-</p>
-<p>
-  link = {{link}}
-</p>
-
-<div style="width: 100px; height: 100px;" [style.background-image]="'url(' + randomurl + ')'">
-1
-</div>
-
-<hr> -->
-
-
 <h3 *ngIf="product !== null" class="product-title">{{product.title}}</h3>
 <div *ngIf="product !== null" class="row">
 
@@ -50,17 +36,23 @@
   <div class="right-side-bar col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
 
     <div class="buy-panel-container">
-
-      <!-- <div class="spacer"></div> -->
       <div class="buy-panel">
-        <span class="price text-success">{{product.price / 100}} &#8372;</span>
-        <button type="button" class="btn btn-outline-primary"
-         [ngClass]="{'disabled': dataService.username == null}">
-          <i class="fas fa-shopping-basket"></i> Купить
-        </button>
-      </div>
-      <!-- <div class="spacer"></div> -->
 
+        <span class="price text-success">{{product.price / 100}} &#8372;</span>
+
+        <button class="btn btn-outline-primary" [ngClass]="{'disabled': dataService.username == null, 'btn-outline-success': inBasket}"
+          (click)="addToBasket()">
+          <span *ngIf="!inBasket">
+            <i class="fas fa-shopping-basket"></i> Купить
+          </span>
+          <span *ngIf="inBasket">
+            <i class="fas fa-check"></i> Добавить
+          </span>
+        </button>
+
+        <span *ngIf="inBasket" class="inBasket text-success">В корзине: {{inBasket}} шт.</span>
+
+      </div>
     </div>
 
     <!-- <div class="comments">

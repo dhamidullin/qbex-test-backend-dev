@@ -44,6 +44,12 @@ export class HttpService {
   getProductById(id: String) {
     return this.http.get('/getProductById', { params: { id: id } });
   }
+  inBasket(id: any) {
+    return this.http.get('/inBasket', { params: { id: id } });
+  }
+  addToBasket(id: any) {
+    return this.http.get('/addToBasket', { params: { id: id } });
+  }
 
   // для админов 
   deleteProduct(link: String) {

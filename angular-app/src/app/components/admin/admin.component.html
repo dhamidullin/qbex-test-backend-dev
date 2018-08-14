@@ -1,10 +1,20 @@
 <div class="admin-panel">
-  <div class="btn-group" role="group" aria-label="Basic example">
+  <div class="btn-group" role="group">
     <a [routerLink]="['/products']" (click)="dataService.rowDisplay=true" class="btn btn-outline-secondary">
       <i class="fas fa-folder-open"></i> Перейти в каталог товаров
     </a>
     <a [routerLink]="['/admin/users']" class="btn btn-outline-secondary">
       <i class="fas fa-users-cog"></i> Перейти в список пользователей
+    </a>
+  </div>
+  <br>
+  <br>
+  <div class="btn-group" role="group">
+    <a [routerLink]="['/products']" (click)="dataService.rowDisplay=true" class="btn btn-outline-secondary">
+      <i class="fas fa-plus"></i> Добавить продукт
+    </a>
+    <a [routerLink]="['/admin/users']" class="btn btn-outline-secondary">
+      <i class="fas fa-plus"></i> Добавить пользователя
     </a>
   </div>
 </div>

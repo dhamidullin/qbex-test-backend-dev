@@ -82,6 +82,11 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     exports.getUsersList = (callback) => {
         UserModel.find({}, callback);
     }
+    exports.addToBasket = (id, idOfProduct, callback) => {
+        UserModel.update({ _id: ObjectId(id) }, { $push: { basket: idOfProduct } }, (err, raw) => {
+            callback(err, raw);
+        });
+    }
 
     exports.getCatalog = (query, callback) => {
         ProductModel.find(query, (err, docs) => {

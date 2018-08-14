@@ -164,6 +164,30 @@ app.get('/getProductById', (req, res, next) => {
         }));
     });
 });
+app.get('/inBasket', (req, res, next) => {
+    db.getUserObject(req.user.id, (err, doc) => {
+        if (err)
+            return console.log(err);
+        var n = 0;
+        for (let i = 0; i < doc.basket.length; i++)
+            if (doc.basket.includes(req.query.id))
+                n++;
+        res.end(JSON.stringify(
+            n
+        ));
+    });
+});
+app.get('/addToBasket', (req, res, next) => {
+    if (!isAuthenticated())
+        return;
+    db.addToBasket(req.user.id, req.params.id, (err, raw) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            err: false
+        }));
+    });
+});
 
 // для админов
 app.delete('/deleteProduct', (req, res, next) => {

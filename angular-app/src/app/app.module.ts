@@ -35,15 +35,9 @@ import { UsersListComponent } from './components/users-list/users-list.component
 
 
 import { OnlyAdminGuard } from './guards/only-admin.guard';
-
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 const appRoutes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
   {
     path: 'home',
     component: HomeComponent
@@ -71,10 +65,16 @@ const appRoutes: Routes = [
         path: 'editProduct/:link', component: EditorComponent
       },
       {
+        path: 'addProduct', component: EditorComponent
+      },
+      {
         path: 'users', children: [
           {
             path: '',
             component: UsersListComponent
+          },
+          {
+            path: 'add', component: UserEditorComponent
           },
           {
             path: ':id', component: UserEditorComponent
@@ -95,6 +95,11 @@ const appRoutes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: '**',

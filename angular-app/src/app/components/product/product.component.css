@@ -45,6 +45,10 @@ div.row div.right-side-bar div.buy-panel-container div.buy-panel button {
   font-size: 125%;
 }
 
+div.row div.right-side-bar div.buy-panel-container div.buy-panel span.inBasket {
+  padding-left: 1em;
+}
+
 div.spacer {
   height: 150px;
 }
