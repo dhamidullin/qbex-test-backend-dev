@@ -75,11 +75,11 @@
 
     <hr>
 
-    <button *ngIf="creatorMode == false" class="btn btn-primary" (click)="updateProduct()">
+    <button *ngIf="!creatorMode" class="btn btn-primary" (click)="updateProduct()">
       Обновить
     </button>
 
-    <button *ngIf="creatorMode == true" class="btn btn-primary" (click)="addProduct()">
+    <button *ngIf="creatorMode" class="btn btn-primary" (click)="addProduct()">
       Добавить
     </button>
 

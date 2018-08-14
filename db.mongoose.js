@@ -82,10 +82,35 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     exports.getUsersList = (callback) => {
         UserModel.find({}, callback);
     }
-    exports.addToBasket = (id, idOfProduct, callback) => {
-        UserModel.update({ _id: ObjectId(id) }, { $push: { basket: idOfProduct } }, (err, raw) => {
-            callback(err, raw);
+    exports.deleteUserById = (id, callback) => {
+        UserModel.findOneAndRemove({ _id: ObjectId(id) }, (err, res) => {
+            callback(err, res);
         });
+    }
+    exports.addToBasket = (idOfUser, idOfProduct, callback) => {
+
+
+        UserModel.updateOne({ _id: ObjectId(idOfUser) }, { $push: { basket: idOfProduct } }, (err, row) => {
+            callback(err, row)
+        });
+
+
+
+        // UserModel.findOne({ _id: ObjectId(idOfUser) }, (err, user) => {
+        //     if (err)
+        //         return console.log(err)
+        //     user.set({ $push: { basket: idOfProduct } });
+        //     user.save((err, savedUser) => {
+        //         if (err)
+        //             return console.log(err)
+        //         console.log(savedUser);
+        //     });
+        // });
+
+
+        // UserModel.update({ _id: ObjectId(idOfUser) }, { $push: { basket: idOfProduct } }, (err, raw) => {
+        //     callback(err, raw);
+        // });
     }
 
     exports.getCatalog = (query, callback) => {
@@ -132,6 +157,15 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
     // }).save(err => {
     //     console.log('saved')
     //     console.log(err)
+    // });
+
+    // UserModel.findOne({ username: 'admin' }, (err, admin) => {
+    //     admin.set({ basket: [] })
+    //     admin.save((err, savedAdmin) => {
+    //         if (err)
+    //             return console.log(err)
+    //         // console.log(savedAdmin);
+    //     });
     // });
 });
 

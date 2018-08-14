@@ -44,8 +44,8 @@ export class HttpService {
   getProductById(id: String) {
     return this.http.get('/getProductById', { params: { id: id } });
   }
-  inBasket(id: any) {
-    return this.http.get('/inBasket', { params: { id: id } });
+  howManyInBasket(id: any) {
+    return this.http.get('/howManyInBasket', { params: { id: id } });
   }
   addToBasket(id: any) {
     return this.http.get('/addToBasket', { params: { id: id } });
@@ -67,7 +67,7 @@ export class HttpService {
     return this.http.get('/getUserList');
   }
   deleteUser(id: any) {
-    return this.http.delete('/deleteProduct', { params: { id: id } });
+    return this.http.delete('/deleteUser', { params: { id: id } });
   }
   getUserObject(id: any) {
     return this.http.get('/getUserObject', { params: { id: id } });

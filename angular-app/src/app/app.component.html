@@ -55,17 +55,10 @@
   <router-outlet></router-outlet>
 </div>
 
-<app-basket [ngClass]="{'display-basket-true' : dataService.showBasket, 'display-basket-false' : !dataService.showBasket}"></app-basket>
-<style>
-  .display-basket-true {
-    display: block
-  }
-
-  .display-basket-false {
-    display: none
-  }
-</style>
+<app-basket *ngIf="dataService.showBasket"></app-basket>
 
 <!-- <editor [(ngModel)]="data" [init]="{plugins: 'link lists'}" apiKey="vm3fozlgp04ukynxiispecc43xjwkph2xvlkhl2d15c1o5s1"></editor>
 
 <button class="btn btn-access" (click)="func()">button</button> -->
+
+<!-- [ngStyle]="[display: block] : dataService.showBasket; [display: none] : !dataService.showBasket" -->

@@ -44,7 +44,7 @@ export class ProductComponent implements OnInit {
 
     this.httpService.getProduct(this.link).subscribe(data => {
       this.product = data.json().product;
-      this.title.setTitle('this.product.title');
+      this.title.setTitle(this.product.title);
       if (this.dataService.username !== null) {
         this.reloadInBasket();
       }
@@ -52,13 +52,17 @@ export class ProductComponent implements OnInit {
   }
 
   reloadInBasket() {
-    this.httpService.inBasket(this.product.id).subscribe(data => {
-      this.inBasket = data.json();
+    this.httpService.howManyInBasket(this.product._id).subscribe(data => {
+      alert(data.json());
+      this.inBasket = data.json().n;
     });
   }
 
   addToBasket() {
-    this.httpService.addToBasket(this.product.id).subscribe(data => {
+    if (this.dataService.username == null)
+      return alert('Сперва войдите в аккаунт');
+    alert(this.product._id);
+    this.httpService.addToBasket(this.product._id).subscribe(data => {
       if (!data.json().err)
         this.reloadInBasket();
     })

@@ -45,8 +45,8 @@ export class UsersListComponent implements OnInit {
     if (confirm('Удалить пользователя?')) {
       this.httpService.deleteUser(id).subscribe(data => {
         if (!data.json().err) {
-          alert('Удален');
           this.reloadUsers();
+          alert('Удален');
         }
       });
     }

@@ -68,6 +68,7 @@ passport.use('localStrategy', new LocalStrategy(
 // мониторинг запросов
 app.use((req, res, next) => {
     console.log(req.method + ' ' + req.url);
+    req.isAdmin = (req.isAuthenticated()) && (req.user.status == 'admin');
     next();
 });
 
@@ -106,6 +107,7 @@ app.post('/sign-in', (req, res, next) => {
     })(req, res, next);
 });
 app.get("/logout", (req, res, next) => {
+    console.log(req.isAdmin);
     req.session.destroy();
     req.logOut();
     res.end(JSON.stringify({
@@ -121,9 +123,10 @@ app.get('/username', (req, res, next) => {
     res.end(JSON.stringify(req.user.username));
 });
 app.get('/isAdmin', (req, res, next) => {
-    if (!req.isAuthenticated())
-        return res.end(JSON.stringify(false));
-    res.end(JSON.stringify(req.user.status == 'admin'));
+    res.end(JSON.stringify(req.isAdmin));
+    // if (!req.isAuthenticated())
+    //     return res.end(JSON.stringify(false));
+    // res.end(JSON.stringify(req.user.status == 'admin'));
 });
 app.get('/getBasket', (req, res, next) => {
     if (!req.isAuthenticated())
@@ -164,23 +167,26 @@ app.get('/getProductById', (req, res, next) => {
         }));
     });
 });
-app.get('/inBasket', (req, res, next) => {
-    db.getUserObject(req.user.id, (err, doc) => {
+// есть ли товар в корзине у пальзователя
+app.get('/howManyInBasket', (req, res, next) => {
+    if (!req.isAuthenticated())
+        return res.end(JSON.stringify({ n: 0 }));
+    // console.log(req.user);
+    db.getUserObject(req.user._id, (err, doc) => {
         if (err)
             return console.log(err);
         var n = 0;
         for (let i = 0; i < doc.basket.length; i++)
-            if (doc.basket.includes(req.query.id))
+            if (req.query.id == (doc.basket[i]))
                 n++;
-        res.end(JSON.stringify(
-            n
-        ));
+        res.end(JSON.stringify({ n: n }));
     });
 });
 app.get('/addToBasket', (req, res, next) => {
-    if (!isAuthenticated())
+    if (!req.isAuthenticated())
         return;
-    db.addToBasket(req.user.id, req.params.id, (err, raw) => {
+    console.log(req.query.id)
+    db.addToBasket(req.user._id, req.query.id, (err, raw) => {
         if (err)
             return console.log(err);
         res.end(JSON.stringify({
@@ -215,7 +221,7 @@ app.post('/addProduct', (req, res, next) => {
             console.log(err);
     });
 });
-app.get('/getUserList', (erq, res, next) => {
+app.get('/getUserList', (req, res, next) => {
     db.getUsersList((err, docs) => {
         if (err)
             return console.log(err);
@@ -224,8 +230,8 @@ app.get('/getUserList', (erq, res, next) => {
         }));
     });
 });
-app.get('/deleteProduct', (erq, res, next) => {
-    db.deleteOneProductById(req.query.id, (err) => {
+app.delete('/deleteUser', (req, res, next) => {
+    db.deleteUserById(req.query.id, (err, deletedDoc) => {
         if (err)
             return console.log(err);
         res.end(JSON.stringify({
