@@ -14,7 +14,7 @@ export class UsersListComponent implements OnInit {
     private title: Title
   ) { }
 
-  users: any[] = [
+  users: any[] = [/*
     {
       username: 'admin',
       status: 'admin',
@@ -30,7 +30,7 @@ export class UsersListComponent implements OnInit {
       status: 'user',
       _id: 2
     },
-  ];
+  */];
 
   ngOnInit() {
     this.title.setTitle('Список пользователей');
