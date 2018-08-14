@@ -53,7 +53,6 @@ export class ProductComponent implements OnInit {
 
   reloadInBasket() {
     this.httpService.howManyInBasket(this.product._id).subscribe(data => {
-      alert(data.json());
       this.inBasket = data.json().n;
     });
   }
@@ -61,7 +60,6 @@ export class ProductComponent implements OnInit {
   addToBasket() {
     if (this.dataService.username == null)
       return alert('Сперва войдите в аккаунт');
-    alert(this.product._id);
     this.httpService.addToBasket(this.product._id).subscribe(data => {
       if (!data.json().err)
         this.reloadInBasket();

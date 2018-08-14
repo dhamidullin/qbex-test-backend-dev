@@ -92,7 +92,32 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             callback(err, row)
         });
     }
+    exports.remooveFromBasket = (idOfUser, idOfProduct, callback) => {
 
+        // UserModel.updateOne({ _id: ObjectId(idOfUser) }, { $unset: { basket: idOfProduct } }, (err, row) => {
+        //     callback(err, row);
+        // });
+
+        // UserModel.find({ _id: ObjectId(idOfUser) }, (err, doc) => {
+        //     console.log(doc);
+        // });
+
+        UserModel.findOne({ _id: ObjectId(idOfUser) }, (err, user) => {
+            if (err)
+                return console.log(err);
+            // console.log(user)
+            // console.log(user.basket)
+            // console.log(user.basket[2])
+            for (var i = 0; i < user.basket.length; i++)
+                if ('' + user.basket[i] == idOfProduct) {
+                    user.basket.splice(i, 1);
+                    break;
+                }
+            UserModel.update({ _id: ObjectId(idOfUser) }, { $set: user }, (err, row) => {
+                callback(err, row);
+            });
+        });
+    }
     exports.getCatalog = (query, callback) => {
         ProductModel.find(query, (err, docs) => {
             callback(err, docs);

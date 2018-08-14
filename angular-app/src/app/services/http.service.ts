@@ -11,7 +11,7 @@ export class HttpService {
 
   constructor(private http: Http) { }
 
-  // логин логаут и прочее
+  // логин логаут и прочее для юзера
   signIn(loginData: UserInfo) {
     return this.http.post('/sign-in', loginData);
   }
@@ -33,6 +33,12 @@ export class HttpService {
   getBasket() {
     return this.http.get('/getBasket');
   }
+  remooveFromBasket(id: string) {
+    return this.http.get('/remooveFromBasket', { params: { id: id } });
+  }
+  addToBasket(id: any) {
+    return this.http.get('/addToBasket', { params: { id: id } });
+  }
 
   // безопасные роуты
   getCatalog(query: object) {
@@ -47,11 +53,8 @@ export class HttpService {
   howManyInBasket(id: any) {
     return this.http.get('/howManyInBasket', { params: { id: id } });
   }
-  addToBasket(id: any) {
-    return this.http.get('/addToBasket', { params: { id: id } });
-  }
   getProductsByManyIds(ids: string[]) {
-    return this.http.get('/getProductsByManyIds', { params: { ids: ids } });
+    return this.http.post('/getProductsByManyIds', { ids: ids });
   }
 
   // для админов 

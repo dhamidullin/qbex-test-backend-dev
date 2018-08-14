@@ -31,19 +31,29 @@ export class BasketComponent implements OnInit {
   }
 
   refreshBasket() {
+    this.basket_ids = [];
+    this.products = [];
     this.httpService.getBasket().subscribe(data => {
       this.basket_ids = data.json().basket;
+      if (this.basket_ids.length > 0) {
+        this.httpService.getProductsByManyIds(this.basket_ids).subscribe(data => {
 
-      this.httpService.getProductsByManyIds(this.basket_ids).subscribe(data => {
+          let productsCache = data.json().products;
 
-        let productsCache = data.json().products;
-
-        productsCache.forEach((product, index) => {
-          productsCache[index].count = this.basket_ids.filter(x => x === product._id).length;
-          console.log(this.basket_ids.filter(x => x === product._id).length);
+          productsCache.forEach((product, index) => {
+            productsCache[index].count = this.basket_ids.filter(x => x === product._id).length;
+            console.log(this.basket_ids.filter(x => x === product._id).length);
+          });
+          this.products = productsCache;
         });
-        this.products = productsCache;
-      });
+      }
+    });
+  }
+  remooveFromBasket(id: string) {
+    this.httpService.remooveFromBasket(id).subscribe(data => {
+      // console.log(data.json())
+      if (data.json().err == false)
+        this.refreshBasket();
     });
   }
 }

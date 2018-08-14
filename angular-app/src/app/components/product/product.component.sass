@@ -3,7 +3,7 @@ h3.product-title
 div.row
     div.left-side-bar
         padding: 0 6px
-        div.carousel        
+        div.carousel
             border-top: 3px solid lightgray 
             padding-top: 9px
             box-sizing: border-box
@@ -19,6 +19,10 @@ div.row
             border-top: 3px solid lightgray
     div.right-side-bar
         padding: 0 6px
+        // .carousel-control-prev, .carousel-control-next
+        //     border: 0.6px solid #FEE2E4 !important
+        //     background-color: #FCF5F5 !important
+        //     color: rgba(200, 20, 20, 0.4) !important
         div.buy-panel-container
             // display: inline-flex
             // justify-content: center
@@ -35,6 +39,15 @@ div.row
                     font-size: 125%
                 span.inBasket
                     padding-left: 1em
+                span.refresh
+                    position: relative
+                    display: inline-block
+                    margin-left: 4px
+                span.refresh:hover
+                    color: red !important
+                    left: 3px
+                    top: -2px
+                    
 
 div.spacer
     height: 150px

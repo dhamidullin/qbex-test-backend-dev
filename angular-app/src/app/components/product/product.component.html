@@ -49,8 +49,11 @@
             <i class="fas fa-check"></i> Добавить еще
           </span>
         </button>
-        <br *ngIf="inBasket">
-        <span *ngIf="inBasket" class="inBasket text-success">В корзине: {{inBasket}} шт. на {{product.price / 100 * inBasket}} &#8372;</span>
+        <br>
+        <span class="inBasket text-success">В корзине: {{inBasket}} шт. на {{product.price / 100 * inBasket}} &#8372;</span>
+        <i class="fas fa-sync-alt refresh text-warning" (click)="reloadInBasket()"></i>
+
+
 
       </div>
     </div>

@@ -49,6 +49,18 @@ div.row div.right-side-bar div.buy-panel-container div.buy-panel span.inBasket {
   padding-left: 1em;
 }
 
+div.row div.right-side-bar div.buy-panel-container div.buy-panel span.refresh {
+  position: relative;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+div.row div.right-side-bar div.buy-panel-container div.buy-panel span.refresh:hover {
+  color: red !important;
+  left: 3px;
+  top: -2px;
+}
+
 div.spacer {
   height: 150px;
 }

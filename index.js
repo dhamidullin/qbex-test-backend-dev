@@ -76,7 +76,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// регистрация и прочее
+// регистрация и прочее для юзера
 app.post("/sign-up", (req, res) => {
     if (req.isAuthenticated())
         return res.end(JSON.stringify({ err: "Вы уже выполнили вход." }));
@@ -142,6 +142,39 @@ app.get('/getBasket', (req, res, next) => {
         }));
     });
 });
+app.get('/howManyInBasket', (req, res, next) => {
+    if (!req.isAuthenticated())
+        return res.end(JSON.stringify({ n: 0 }));
+    db.getUserObject(req.user._id, (err, doc) => {
+        if (err)
+            return console.log(err);
+        var n = 0;
+        for (let i = 0; i < doc.basket.length; i++)
+            if (req.query.id == (doc.basket[i]))
+                n++;
+        res.end(JSON.stringify({ n: n }));
+    });
+});
+app.get('/addToBasket', (req, res, next) => {
+    if (!req.isAuthenticated())
+        return;
+    db.addToBasket(req.user._id, req.query.id, (err, raw) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            err: false
+        }));
+    });
+});
+app.get('/remooveFromBasket', (req, res, next) => {
+    db.remooveFromBasket(req.user._id, req.query.id, (err, row) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            err: false
+        }));
+    });
+})
 
 // безопасные роуты
 app.get('/getCatalog', (req, res, next) => {
@@ -170,44 +203,16 @@ app.get('/getProductById', (req, res, next) => {
         }));
     });
 });
-app.get('/getProductsByManyIds', (req, res, next) => {
-    console.log(req.query);
+app.post('/getProductsByManyIds', (req, res, next) => {
     if (!req.isAuthenticated())
         res.end(JSON.stringify({
             products: []
         }));
-    db.getProductsByManyIds(req.query.ids, (err, products) => {
+    db.getProductsByManyIds(req.body.ids, (err, products) => {
         if (err)
             return console.log(err);
         res.end(JSON.stringify({
             products: products
-        }));
-    });
-});
-// есть ли товар в корзине у пальзователя
-app.get('/howManyInBasket', (req, res, next) => {
-    if (!req.isAuthenticated())
-        return res.end(JSON.stringify({ n: 0 }));
-    // console.log(req.user);
-    db.getUserObject(req.user._id, (err, doc) => {
-        if (err)
-            return console.log(err);
-        var n = 0;
-        for (let i = 0; i < doc.basket.length; i++)
-            if (req.query.id == (doc.basket[i]))
-                n++;
-        res.end(JSON.stringify({ n: n }));
-    });
-});
-app.get('/addToBasket', (req, res, next) => {
-    if (!req.isAuthenticated())
-        return;
-    console.log(req.query.id)
-    db.addToBasket(req.user._id, req.query.id, (err, raw) => {
-        if (err)
-            return console.log(err);
-        res.end(JSON.stringify({
-            err: false
         }));
     });
 });
