@@ -1,23 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
+import { OrderListComponent } from './components/order-list/order-list.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AboutComponent } from './components/about/about.component';
-import { BasketComponent } from './components/basket/basket.component';
-import { CatalogComponent } from './components/catalog/catalog.component';
 import { EditorComponent } from './components/editor/editor.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProductComponent } from './components/product/product.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { BasketComponent } from './components/basket/basket.component';
 import { UserEditorComponent } from './components/user-editor/user-editor.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { DisplayUsernameByIdComponent } from './components/display-username-by-id/display-username-by-id.component';
+import { OrderComponent } from './components/order/order.component';
+import { DisplayProductByIdComponent } from './components/order/display-product-by-id/display-product-by-id.component';
 
 /**
  * home
@@ -36,7 +40,6 @@ import { UsersListComponent } from './components/users-list/users-list.component
 
 import { OnlyAdminGuard } from './guards/only-admin.guard';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { OrdersComponent } from './components/orders/orders.component';
 
 const appRoutes: Routes = [
   {
@@ -73,7 +76,17 @@ const appRoutes: Routes = [
         path: 'addProduct', component: EditorComponent
       },
       {
-        path: 'orders', component: OrdersComponent
+        path: 'orders',
+        children: [
+          {
+            path: '',
+            component: OrderListComponent
+          },
+          {
+            path: ':id',
+            component: OrderComponent
+          }
+        ]
       },
       {
         path: 'users', children: [
@@ -98,7 +111,6 @@ const appRoutes: Routes = [
     path: 'sign-up',
     component: SignUpComponent
   },
-
   {
     path: 'about',
     component: AboutComponent
@@ -123,7 +135,10 @@ const appRoutes: Routes = [
     EditorComponent,
     UserEditorComponent,
     UsersListComponent,
-    OrdersComponent,
+    OrderListComponent,
+    DisplayUsernameByIdComponent,
+    OrderComponent,
+    DisplayProductByIdComponent,
     BasketComponent
   ],
   imports: [

@@ -71,7 +71,6 @@ passport.use('localStrategy', new LocalStrategy(
     }
 ));
 
-// мониторинг запросов
 app.use((req, res, next) => {
     console.log(req.method + ' ' + req.url);
     req.isAdmin = (req.isAuthenticated()) && (req.user.status == 'admin');
@@ -129,9 +128,6 @@ app.get('/username', (req, res, next) => {
 });
 app.get('/isAdmin', (req, res, next) => {
     res.end(JSON.stringify(req.isAdmin));
-    // if (!req.isAuthenticated())
-    //     return res.end(JSON.stringify(false));
-    // res.end(JSON.stringify(req.user.status == 'admin'));
 });
 app.get('/getBasket', (req, res, next) => {
     if (!req.isAuthenticated())
@@ -240,6 +236,8 @@ app.post('/getProductsByManyIds', (req, res, next) => {
 
 // для админов
 app.delete('/deleteProduct', (req, res, next) => {
+    if (!req.isAdmin)
+        return;
     var link = req.query.link;
     db.deleteOneProductByLink(link, (err) => {
         if (err)
@@ -251,6 +249,8 @@ app.delete('/deleteProduct', (req, res, next) => {
     });
 });
 app.post('/updateProduct', (req, res, next) => {
+    if (!req.isAdmin)
+        return;
     var product = req.body.product;
     db.updateProduct(product, (err) => {
         if (err)
@@ -258,6 +258,8 @@ app.post('/updateProduct', (req, res, next) => {
     });
 });
 app.post('/addProduct', (req, res, next) => {
+    if (!req.isAdmin)
+        return;
     var product = req.body.product;
     db.addProduct(product, (err) => {
         if (err)
@@ -265,6 +267,8 @@ app.post('/addProduct', (req, res, next) => {
     });
 });
 app.get('/getUserList', (req, res, next) => {
+    if (!req.isAdmin)
+        return;
     db.getUsersList((err, docs) => {
         if (err)
             return console.log(err);
@@ -274,6 +278,8 @@ app.get('/getUserList', (req, res, next) => {
     });
 });
 app.delete('/deleteUser', (req, res, next) => {
+    if (!req.isAdmin)
+        return;
     db.deleteUserById(req.query.id, (err, deletedDoc) => {
         if (err)
             return console.log(err);
@@ -283,12 +289,36 @@ app.delete('/deleteUser', (req, res, next) => {
     });
 });
 app.get('/getUserObject', (req, res, next) => {
-    db.getUserObject(req.query.id, (err, doc) => {
+    if (!req.isAdmin)
+        return;
+    db.getUserObject(req.query.id, (err, user) => {
         if (err)
             return console.log(err);
         res.end(JSON.stringify({
-            userObject: doc
+            userObject: user
         }));
+    });
+});
+app.get('/getOrders', (req, res, next) => {
+    if (!req.isAdmin)
+        return;
+    db.getOrders((err, orders) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            orders: orders
+        }))
+    });
+});
+app.get('/getOrder', (req, res, next) => {
+    if (!req.isAdmin)
+        return;
+    db.getOrderById(req.query.id, (err, order) => {
+        if (err)
+            return console.log(err);
+        res.end(JSON.stringify({
+            order: order
+        }))
     });
 });
 

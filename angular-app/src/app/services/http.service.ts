@@ -84,4 +84,10 @@ export class HttpService {
   getUserObject(id: any) {
     return this.http.get('/getUserObject', { params: { id: id } });
   }
+  getOrders() {
+    return this.http.get('/getOrders');
+  }
+  getOrderById(id: string) {
+    return this.http.get('/getOrder', { params: { id: id } });
+  }
 }

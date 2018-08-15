@@ -1,3 +1,49 @@
-<p>
-  orders works!
-</p>
+<!-- <tbody>
+  <tr *ngFor="let product of products, let i = index">
+
+    <td>
+      {{i + 1}}
+    </td>
+
+    <td>
+      <h5>
+        <a [routerLink]="[ 'http://localhost/products/' + product.link] " (click)="dataService.showBasket=false ">
+          {{product.title}}
+        </a>
+      </h5>
+    </td>
+
+    <td>
+      <span>{{product.price / 100}} &#8372;</span>
+    </td>
+
+    <td>
+      {{product.count}}
+    </td>
+
+    <td>
+      {{product.count * product.price / 100}} &#8372;
+    </td>
+
+    <td>
+      <button class="btn btn-outline-secondary" (click)="remooveFromBasket(product._id)">
+        <i class="far fa-trash-alt"></i> Убрать
+      </button>
+    </td>
+
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>{{totalPrice / 100}} &#8372;</td>
+    <td>
+      <button class="btn btn-outline-secondary" (click)="remooveAllFromBasket()">
+        <i class="far fa-trash-alt"></i> Убрать все
+      </button>
+    </td>
+  </tr>
+</tbody>
+
+</table> -->

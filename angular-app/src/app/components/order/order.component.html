@@ -1,0 +1,17 @@
+<p>
+  Заказ {{id}}
+</p>
+
+<p *ngIf="order">
+  Пользователь:
+  <b>
+    <app-display-username-by-id [user_id]="order.user_id"></app-display-username-by-id>
+  </b>
+
+</p>
+
+<ul style="list-style:none" *ngIf="order">
+  <li *ngFor="let product_id of order.product_ids, let i = index">
+    <app-display-product-by-id [id]="product_id"></app-display-product-by-id>
+  </li>
+</ul>

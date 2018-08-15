@@ -3,11 +3,11 @@ import { HttpService } from '../../services/http.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  selector: 'app-order-list',
+  templateUrl: './order-list.component.html',
+  styleUrls: ['./order-list.component.css']
 })
-export class OrdersComponent implements OnInit {
+export class OrderListComponent implements OnInit {
 
   orders: any[] = [];
 
@@ -19,13 +19,8 @@ export class OrdersComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('Заказы');
     this.httpService.getOrders().subscribe(data => {
+      console.log(data.json());
       this.orders = data.json().orders;
-
-
-
-
-
     });
   }
-
 }

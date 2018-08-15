@@ -1,0 +1,4 @@
+<a *ngIf="product" [routerLink]="['/products/' + product.link]">
+  {{product.title}}
+</a>
+<span *ngIf="!product">Не найден</span>

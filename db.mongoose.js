@@ -206,23 +206,33 @@ mongoose.connect('mongodb://localhost/qbex-test-backend-dev', (err, db) => {
             });
         });
     }
+    exports.getOrders = (callback) => {
+        OrderModel.find({}, (err, orders) => {
+            if (err)
+                return console.log(err);
+            callback(err, orders);
+        });
+    }
+    exports.getOrderById = (id, callback) => {
+        OrderModel.findOne({ _id: ObjectId(id) }, (err, order) => {
+            if (err)
+                return console.log(err);
+            callback(err, order);
+        });
+    }
 
-    // new UserModel({
-    //     username: 'admin',
-    //     password: 'admin',
-    //     status: 'admin'
-    // }).save(err => {
-    //     console.log('saved')
-    //     console.log(err)
-    // });
 
-    // UserModel.findOne({ username: 'admin' }, (err, admin) => {
-    //     admin.set({ basket: [] })
-    //     admin.save((err, savedAdmin) => {
-    //         if (err)
-    //             return console.log(err)
-    //         // console.log(savedAdmin);
-    //     });
-    // });
+
+    UserModel.find({ status: 'admin' }, (err, admin) => {
+        if (!admin.length)
+            new UserModel({
+                username: 'admin',
+                password: 'admin',
+                status: 'admin'
+            }).save(err => {
+                if (err)
+                    console.log(err)
+            });
+    });
 });
 

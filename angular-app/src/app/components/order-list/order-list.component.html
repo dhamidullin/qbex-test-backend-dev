@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <td>№</td>
+      <td>Имя пользователя</td>
+      <td>Товаров</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders, let i = index">
+
+      <td>{{i}}</td>
+      <td>
+        <app-display-username-by-id [user_id]="order.user_id"></app-display-username-by-id>
+      </td>
+      <td>
+        {{order.product_ids.length}}
+      </td>
+      <td>
+        <a [routerLink]="order._id" class="btn btn-outline-secondary">
+          Перейти
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
