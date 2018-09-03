@@ -356,7 +356,7 @@ app.get('/api/getOrder', (req, res, next) => {
 
 
 app.get('/*', (req, res, next) => {
-    res.sendFile(__dirname + '/api/angular-app/dist/angular-app/index.html')
+    res.sendFile(__dirname + '/angular-app/dist/angular-app/index.html')
 });
 
 app.listen(port, () => {

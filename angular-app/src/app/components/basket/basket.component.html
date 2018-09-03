@@ -13,9 +13,6 @@
       <h2 *ngIf="dataService.username && !products.length" class="text-warning text-center">
         Корзина пуста...
       </h2>
-      <!-- 
-      {{basket_ids}}
-      <br> {{productsJson}} -->
 
 
       <table *ngIf="products.length" class=" table ">
@@ -40,9 +37,7 @@
 
             <td>
               <h5>
-                <!-- <a [routerLink]="[ 'http://localhost/products/' + product.link] " (click)="dataService.showBasket=false "> -->
                 {{product.title}}
-                <!-- </a> -->
               </h5>
             </td>
 
